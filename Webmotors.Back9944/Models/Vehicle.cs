@@ -6,7 +6,7 @@ namespace Webmotors.Back9944.Models {
         public string Version {get;set;}
         public string Image {get;set;}
         public double Km {get;set;}
-        public decimal Price {get;set;}
+        public string Price {get;set;}
         public int YearModel {get;set;}
         public int YearFab {get;set;}
         public string Color {get;set;}

@@ -1,68 +1,74 @@
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Webmotors.Back9944.Interfaces.Services;
 using Webmotors.Back9944.Models;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Text.Json;
 
-namespace Webmotors.Back9944.Services {
+namespace Webmotors.Back9944.Services
+{
     public class WebmotorsService : IWebmotorsService
     {
         private readonly HttpClient _http;
-        private readonly IConfiguration _configuration;
-        private readonly string _resource;
+        private readonly WebServiceOptions _options;
 
-        public WebmotorsService(HttpClient http, IConfiguration configuration){
+        public WebmotorsService(HttpClient http, IOptions<WebServiceOptions> options)
+        {
             _http = http;
-            _configuration = configuration;
-
-            _http.BaseAddress = new Uri(_configuration.GetSection("WebServiceBase").ToString());
-            _resource = _configuration.GetSection("WebServiceReource").ToString();
+            _options = options.Value;
         }
 
-        public async Task<IEnumerable<VehicleMaker>> GetMakers()
+        public async Task<IEnumerable<Maker>> GetMakers()
         {
-            HttpResponseMessage response = await _http.GetAsync(_resource);
-            
+            HttpResponseMessage response = await _http.GetAsync(_options.Make);
+
             string content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<IEnumerable<VehicleMaker>>(content);
+            JsonSerializerOptions options = SerializeOptions();
+            
+            return JsonSerializer.Deserialize<IEnumerable<Maker>>(content, options);
         }
 
-        public async Task<IEnumerable<VehicleModel>> GetModels(int makerId)
+        public async Task<IEnumerable<Model>> GetModels(int makerId)
         {
-            HttpResponseMessage response = await _http.GetAsync(_resource);
-            
+            HttpResponseMessage response = await _http.GetAsync(_options.Model + makerId);
+
             string content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<IEnumerable<VehicleModel>>(content);
+            JsonSerializerOptions options = SerializeOptions();
+
+            return JsonSerializer.Deserialize<IEnumerable<Model>>(content, options);
         }
 
         public async Task<IEnumerable<Vehicle>> GetVehicles(int pageIndex)
         {
-            HttpResponseMessage response = await _http.GetAsync(_resource);
+            HttpResponseMessage response = await _http.GetAsync(_options.Vehicle + pageIndex);
 
             string content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<IEnumerable<Vehicle>>(content);
+            JsonSerializerOptions options = SerializeOptions();
+
+            return JsonSerializer.Deserialize<IEnumerable<Vehicle>>(content, options);
         }
 
-        public async Task<IEnumerable<VehicleVersion>> GetVersions(int modelId)
+        public async Task<IEnumerable<Version>> GetVersions(int modelId)
         {
-            HttpResponseMessage response = await _http.GetAsync(_resource);
+            HttpResponseMessage response = await _http.GetAsync(_options.Version + modelId);
 
             string content = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<IEnumerable<VehicleVersion>>(content);
+            JsonSerializerOptions options = SerializeOptions();
+
+            return JsonSerializer.Deserialize<IEnumerable<Version>>(content, options);
         }
 
-        private void Success(HttpResponseMessage response){
-            if(response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                // Criar validação
-            }
+        private JsonSerializerOptions SerializeOptions()
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.PropertyNameCaseInsensitive = true;
+
+            return options;
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Webmotors.Back9944.Configurations;
+using Webmotors.Back9944.Models;
 
 namespace Webmotors.Back9944
 {
@@ -21,6 +22,8 @@ namespace Webmotors.Back9944
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<WebServiceOptions>(options => Configuration.GetSection("WebmotorsWebService").Bind(options));
+
             services.AddDependencyInjectionConfiguration();
             services.AddEntityFrameworkConfigurations(Configuration);
 
