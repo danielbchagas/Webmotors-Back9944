@@ -27,8 +27,8 @@ namespace Webmotors.Back9944.Services
 
             if (!validation.IsValid)
             {
-                IEnumerable<char> errors = validation.Errors.SelectMany(e => e.ErrorMessage);
-                // retornar em um modelo
+                IEnumerable<string> errors = validation.Errors.Select(e => e.ErrorMessage);
+                // Notificar
             }
 
             return _repository.Create(entity);
@@ -40,8 +40,8 @@ namespace Webmotors.Back9944.Services
 
             if (!validation.IsValid)
             {
-                IEnumerable<char> errors = validation.Errors.SelectMany(e => e.ErrorMessage);
-                // retornar em um modelo
+                IEnumerable<string> errors = validation.Errors.Select(e => e.ErrorMessage);
+                // Notificar
             }
 
             return _repository.Delete(entity);
@@ -49,7 +49,7 @@ namespace Webmotors.Back9944.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _repository.Dispose();
         }
 
         public async Task<Advertising> Get(int id) => await _repository.Get(id);
@@ -62,8 +62,8 @@ namespace Webmotors.Back9944.Services
 
             if (!validation.IsValid)
             {
-                IEnumerable<char> errors = validation.Errors.SelectMany(e => e.ErrorMessage);
-                // retornar em um modelo
+                IEnumerable<string> errors = validation.Errors.Select(e => e.ErrorMessage);
+                // Notificar
             }
 
             return _repository.Update(entity);
