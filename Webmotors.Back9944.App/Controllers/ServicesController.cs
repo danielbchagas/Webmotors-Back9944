@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Services;
 
-namespace Webmotors.Back9944.Controllers
+namespace Webmotors.Back9944.App.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -15,28 +15,32 @@ namespace Webmotors.Back9944.Controllers
             _service = service;
         }
 
-        [HttpGet("/Makers")]
+        [HttpGet]
+        [Route("Makers")]
         public async Task<IActionResult> Makers()
         {
             var makers = await _service.GetMakers();
             return Ok(makers);
         }
 
-        [HttpGet("/Models/{makerId:int}")]
+        [HttpGet]
+        [Route("Models/{makerId:int}")]
         public async Task<IActionResult> Models(int makerId)
         {
             var models = await _service.GetModels(makerId);
             return Ok(models);
         }
 
-        [HttpGet("/Versions/{modelId:int}")]
+        [HttpGet]
+        [Route("Versions/{modelId:int}")]
         public async Task<IActionResult> Versions(int modelId)
         {
             var versions = await _service.GetVersions(modelId);
             return Ok(versions);
         }
 
-        [HttpGet("/Vehicles/{pageIndex:int}")]
+        [HttpGet]
+        [Route("Vehicles/{pageIndex:int}")]
         public async Task<IActionResult> Vehicles(int pageIndex)
         {
             var versions = await _service.GetVehicles(pageIndex);

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Webmotors.Back9944.Controllers
+namespace Webmotors.Back9944.App.Controllers
 {
     [ApiController]
     [Route("[controller]")]

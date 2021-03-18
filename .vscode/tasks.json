@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Webmotors.Back9944/Webmotors.Back9944.csproj",
+                "${workspaceFolder}/Webmotors.Back9944.App/Webmotors.Back9944.App.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Webmotors.Back9944/Webmotors.Back9944.csproj",
+                "${workspaceFolder}/Webmotors.Back9944.App/Webmotors.Back9944.App.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Webmotors.Back9944/Webmotors.Back9944.csproj",
+                "${workspaceFolder}/Webmotors.Back9944.App/Webmotors.Back9944.App.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

@@ -1,6 +1,6 @@
 using System;
 
-namespace Webmotors.Back9944
+namespace Webmotors.Back9944.App
 {
     public class WeatherForecast
     {

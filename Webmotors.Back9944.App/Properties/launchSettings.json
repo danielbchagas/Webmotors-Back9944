@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Webmotors.Back9944": {
+    "Self Hosting": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

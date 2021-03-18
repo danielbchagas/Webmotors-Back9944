@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Webmotors.Back9944
+namespace Webmotors.Back9944.App
 {
     public class Program
     {

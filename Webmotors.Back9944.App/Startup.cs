@@ -5,9 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Webmotors.Back9944.Business.Models;
-using Webmotors.Back9944.Configurations;
+using Webmotors.Back9944.App.Configurations;
+using Webmotors.Back9944.App.Middlewares;
 
-namespace Webmotors.Back9944
+namespace Webmotors.Back9944.App
 {
     public class Startup
     {
@@ -23,9 +24,9 @@ namespace Webmotors.Back9944
         {
             services.Configure<WebServiceOptions>(options => Configuration.GetSection("WebmotorsWebService").Bind(options));
 
-            services.AddDependencyInjectionConfiguration();
             services.AddEntityFrameworkConfigurations(Configuration);
-
+            services.AddDependencyInjectionConfiguration();
+            
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -54,6 +55,8 @@ namespace Webmotors.Back9944
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseMiddleware<CustomExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

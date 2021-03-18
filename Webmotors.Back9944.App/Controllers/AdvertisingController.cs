@@ -17,21 +17,24 @@ namespace Webmotors.Back9944.App.Controllers
             _service = service;
         }
 
-        [HttpGet("/Get")]
+        [HttpGet]
+        [Route("Get")]
         public async Task<IActionResult> Get()
         {
             var result = await _service.Get();
             return Ok(result);
         }
 
-        [HttpGet("/Get/{id:int}")]
+        [HttpGet]
+        [Route("GetById/{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.Get(id);
             return Ok(result);
         }
 
-        [HttpPost("/Create")]
+        [HttpPost]
+        [Route("Create")]
         public async Task<IActionResult> Post(Advertising advertising)
         {
             await _service.Create(advertising);
@@ -43,7 +46,8 @@ namespace Webmotors.Back9944.App.Controllers
             return Ok();
         }
 
-        [HttpPut("/Put")]
+        [HttpPut]
+        [Route("Update")]
         public async Task<IActionResult> Put(Advertising advertising)
         {
             await _service.Update(advertising);
@@ -55,7 +59,8 @@ namespace Webmotors.Back9944.App.Controllers
             return Ok();
         }
 
-        [HttpDelete("/Delete/{id:int}")]
+        [HttpDelete]
+        [Route("Delete/{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.Get(id);

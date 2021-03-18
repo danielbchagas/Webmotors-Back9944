@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
 
-namespace Webmotors.Back9944.Services
+namespace Webmotors.Back9944.Business.Services
 {
     public class WebmotorsService : IWebmotorsService
     {
