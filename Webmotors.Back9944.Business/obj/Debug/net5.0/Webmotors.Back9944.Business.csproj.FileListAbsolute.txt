@@ -10,3 +10,15 @@ C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944
 C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.dll
 C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\ref\Webmotors.Back9944.Business.dll
 C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.pdb
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\bin\Debug\net5.0\Webmotors.Back9944.Business.deps.json
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\bin\Debug\net5.0\Webmotors.Back9944.Business.dll
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\bin\Debug\net5.0\ref\Webmotors.Back9944.Business.dll
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\bin\Debug\net5.0\Webmotors.Back9944.Business.pdb
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.csprojAssemblyReference.cache
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.AssemblyInfoInputs.cache
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.AssemblyInfo.cs
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.dll
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\ref\Webmotors.Back9944.Business.dll
+C:\Users\Daniel\Projetos\Webmotors\Webmotors-Back9944\Webmotors.Back9944.Business\obj\Debug\net5.0\Webmotors.Back9944.Business.pdb

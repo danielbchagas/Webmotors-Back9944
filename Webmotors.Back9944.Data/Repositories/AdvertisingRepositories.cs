@@ -18,12 +18,16 @@ namespace Webmotors.Back9944.Business.Repositories
 
         public async Task Create(Advertising entity)
         {
+            if (entity == null) return;
+
             await _context.Advertisings.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Advertising entity)
         {
+            if (entity == null) return;
+
             _context.Advertisings.Remove(entity);
             await _context.SaveChangesAsync();
         }
@@ -39,6 +43,8 @@ namespace Webmotors.Back9944.Business.Repositories
 
         public async Task Update(Advertising entity)
         {
+            if (entity == null) return;
+
             _context.Entry<Advertising>(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }

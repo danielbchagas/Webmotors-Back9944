@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daniel\\OneDrive\\Área de Trabalho\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj": {}
+    "C:\\Users\\Daniel\\Projetos\\Webmotors\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daniel\\OneDrive\\Área de Trabalho\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj": {
+    "C:\\Users\\Daniel\\Projetos\\Webmotors\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daniel\\OneDrive\\Área de Trabalho\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Projetos\\Webmotors\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj",
         "projectName": "Webmotors.Back9944.Business",
-        "projectPath": "C:\\Users\\Daniel\\OneDrive\\Área de Trabalho\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj",
+        "projectPath": "C:\\Users\\Daniel\\Projetos\\Webmotors\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj",
         "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daniel\\OneDrive\\Área de Trabalho\\Webmotors-Back9944\\Webmotors.Back9944.Business\\obj\\",
+        "outputPath": "C:\\Users\\Daniel\\Projetos\\Webmotors\\Webmotors-Back9944\\Webmotors.Back9944.Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",

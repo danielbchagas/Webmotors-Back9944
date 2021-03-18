@@ -39,19 +39,6 @@ namespace Webmotors.Back9944.Business.Services
             await _repository.Create(advertising);
         }
 
-        public async Task Delete(Advertising advertising)
-        {
-            ValidationResult validation = _validator.Validate(advertising);
-            
-            if (!validation.IsValid)
-            {
-                _errors = validation?.Errors.Select(e => e.ErrorMessage);
-                return;
-            }
-            
-            await _repository.Delete(advertising);
-        }
-
         public async Task Update(Advertising advertising)
         {
             ValidationResult validation = _validator.Validate(advertising);
@@ -65,9 +52,19 @@ namespace Webmotors.Back9944.Business.Services
             await _repository.Update(advertising);
         }
 
+        public async Task Delete(Advertising advertising)
+        {
+            await _repository.Delete(advertising);
+        }
+
         public void Dispose()
         {
             _repository.Dispose();
+        }
+
+        public IEnumerable<string> GetErrors()
+        {
+            return _errors;
         }
     }
 }
