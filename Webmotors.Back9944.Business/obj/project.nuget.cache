@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "tigAgJBwFH+eKhQYJWSmblSILRZaJYKFEdpA8URYJ5GeSSx5glO1+1PPxcUE1Hv+Sn1GOV+eGlFhczxepd0F2g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Daniel\\OneDrive\\Área de Trabalho\\Webmotors-Back9944\\Webmotors.Back9944.Business\\Webmotors.Back9944.Business.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Daniel\\.nuget\\packages\\fluentvalidation\\9.5.3\\fluentvalidation.9.5.3.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,15 @@
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\bin\Debug\net5.0\Webmotors.Back9944.Business.dll
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.csprojAssemblyReference.cache
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.AssemblyInfoInputs.cache
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.AssemblyInfo.cs
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\bin\Debug\net5.0\Webmotors.Back9944.Data.deps.json
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\bin\Debug\net5.0\Webmotors.Back9944.Data.dll
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\bin\Debug\net5.0\ref\Webmotors.Back9944.Data.dll
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\bin\Debug\net5.0\Webmotors.Back9944.Data.pdb
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\bin\Debug\net5.0\Webmotors.Back9944.Business.pdb
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.csproj.CopyComplete
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.dll
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\ref\Webmotors.Back9944.Data.dll
+C:\Users\Daniel\OneDrive\Área de Trabalho\Webmotors-Back9944\Webmotors.Back9944.Data\obj\Debug\net5.0\Webmotors.Back9944.Data.pdb
