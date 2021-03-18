@@ -5,7 +5,7 @@ using Webmotors.Back9944.Data;
 using Webmotors.Back9944.Interfaces.Repositories;
 using Webmotors.Back9944.Models;
 
-namespace Webmotors.Back9944.Repositories 
+namespace Webmotors.Back9944.Repositories
 {
     public class AdvertisingRepository : IAdvertisingRepository
     {
@@ -16,16 +16,16 @@ namespace Webmotors.Back9944.Repositories
             _context = context;
         }
 
-        public async Task<int> Create(Advertising entity)
+        public async Task Create(Advertising entity)
         {
             await _context.Advertisings.AddAsync(entity);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(Advertising entity)
+        public async Task Delete(Advertising entity)
         {
             _context.Advertisings.Remove(entity);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -37,10 +37,10 @@ namespace Webmotors.Back9944.Repositories
 
         public async Task<IEnumerable<Advertising>> Get() => await _context.Advertisings.ToListAsync();
 
-        public async Task<int> Update(Advertising entity)
+        public async Task Update(Advertising entity)
         {
             _context.Entry<Advertising>(entity).State = EntityState.Modified;
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

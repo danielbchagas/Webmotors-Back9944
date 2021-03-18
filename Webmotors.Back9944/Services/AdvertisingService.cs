@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Webmotors.Back9944.Interfaces.Repositories;
 using Webmotors.Back9944.Interfaces.Services;
 using Webmotors.Back9944.Models;
-using Webmotors.Back9944.Services.Results;
 using Webmotors.Back9944.Validations;
 
 namespace Webmotors.Back9944.Services
@@ -14,64 +13,56 @@ namespace Webmotors.Back9944.Services
     {
         private readonly AdvertisingValidation _validator;
         private readonly IAdvertisingRepository _repository;
+        public IEnumerable<string> _errors;
         
         public AdvertisingService(IAdvertisingRepository repository)
         {
             _validator = new AdvertisingValidation();
             _repository = repository;
+            _errors = new List<string>();
         }
 
         public async Task<Advertising> Get(int id) => await _repository.Get(id);
 
         public async Task<IEnumerable<Advertising>> Get() => await _repository.Get();
 
-        public async Task<AdvertisingResult> Create(Advertising advertising)
+        public async Task Create(Advertising advertising)
         {
             ValidationResult validation = _validator.Validate(advertising);
-            int result = 0;
-
-            if (validation.IsValid)
-                result = await _repository.Create(advertising);
-
-            return new AdvertisingResult 
-            {
-                Errors = validation?.Errors.Select(e => e.ErrorMessage),
-                AffectedRows = result
-            };
-        }
-
-        public async Task<AdvertisingResult> Delete(Advertising advertising)
-        {
-            ValidationResult validation = _validator.Validate(advertising);
-            int result = 0;
             
-            if (validation.IsValid)
+            if (!validation.IsValid)
             {
-                result = await _repository.Delete(advertising);
+                _errors = validation?.Errors.Select(e => e.ErrorMessage);
+                return;
             }
-
-            return new AdvertisingResult
-            {
-                Errors = validation?.Errors.Select(e => e.ErrorMessage),
-                AffectedRows = result
-            };
+                
+            await _repository.Create(advertising);
         }
 
-        public async Task<AdvertisingResult> Update(Advertising advertising)
+        public async Task Delete(Advertising advertising)
         {
             ValidationResult validation = _validator.Validate(advertising);
-            int result = 0;
-
-            if (validation.IsValid)
+            
+            if (!validation.IsValid)
             {
-                result = await _repository.Update(advertising);
+                _errors = validation?.Errors.Select(e => e.ErrorMessage);
+                return;
+            }
+            
+            await _repository.Delete(advertising);
+        }
+
+        public async Task Update(Advertising advertising)
+        {
+            ValidationResult validation = _validator.Validate(advertising);
+            
+            if (!validation.IsValid)
+            {
+                _errors = validation?.Errors.Select(e => e.ErrorMessage);
+                return;
             }
 
-            return new AdvertisingResult
-            {
-                Errors = validation?.Errors.Select(e => e.ErrorMessage),
-                AffectedRows = result
-            };
+            await _repository.Update(advertising);
         }
 
         public void Dispose()
