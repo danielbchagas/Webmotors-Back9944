@@ -4,54 +4,58 @@ import { Makers, Models, Versions, Vehicles } from "../../services/WebmotorsServ
 
 const Form = (props) => {
     const [id, setId] = useState(props.match.params.id || 0);
-    
+    const [makers, setMakers] = useState([]);
+    const [models, setModels] = useState([]);
+    const [versions, setVersions] = useState([]);
+    const [vehicles, setVehicles] = useState([]);
+
     useEffect(() => {
-        getMakers();
-    }, []);
+        // Makers
+        if(makers.length === 0) {
+            getMakers();
+        }
+        else {
+            const dropdown = document.getElementById("dropdownMakers");
+            mountModelsDropdown(dropdown, getModels);
+        }
 
-    const montaDropdown = (element, data) => {
-        var option = new Option(data.name, data.id);
-        element.add(option);
-    }
+        // Models
+        if(models.length > 0) {
+            const dropdown = document.getElementById("dropdownModels");
+            mountModelsDropdown(dropdown, getVersions);
+        }
+        
+        // Versions
+        if(versions.length > 0) {
+            const dropdown = document.getElementById("dropdownVersions");
+            mountModelsDropdown(dropdown, getVehicles);
+        }
 
-    const desmontaDropdown = (element) => {
-        //
-    }
+        // // Vehicles
+        
+    }, [makers, models, versions, vehicles]);
 
     const getMakers = () => {
         Makers()
         .then(response => {
             if(response.status === 200){
-                var dropdown = document.getElementById("dropdownMarcas");
-                
-                response.data.map(m => {
-                    montaDropdown(dropdown, m);
-                });
-                
-                dropdown.removeAttribute("disabled");
-                dropdown.addEventListener("change", (event) => {
-                    getModels(event.target.value);
-                }, false);
+                setMakers(response.data);
             }
         })
         .catch(error => alert(error));
     }
 
+    const mountModelsDropdown = (element, callback) => {
+        element.addEventListener("change", (event) => {
+            callback(event.target.value);
+        }, false);
+    };
+
     const getModels = (id) => {
         Models(id)
         .then(response => {
             if(response.status === 200){
-                var dropdown = document.getElementById("dropdownModelos");
-                
-                response.data.map(m => {
-                    desmontaDropdown(dropdown);
-                    montaDropdown(dropdown, m);
-                });
-                
-                dropdown.removeAttribute("disabled");
-                dropdown.addEventListener("change", (event) => {
-                getVersions(event.target.value);
-                }, false);
+                setModels(response.data);
             }
         })
         .catch(error => alert(error));
@@ -61,17 +65,7 @@ const Form = (props) => {
         Versions(id)
         .then(response => {
             if(response.status === 200){
-                var dropdown = document.getElementById("dropdownVersoes");
-                
-                response.data.map(m => {
-                    desmontaDropdown(dropdown);
-                    montaDropdown(dropdown, m);
-                });
-                
-                dropdown.removeAttribute("disabled");
-                dropdown.addEventListener("change", (event) => {
-                // getVersions(event.target.value);
-                }, false);
+                setVersions(response.data);
             }
         })
         .catch(error => alert(error));
@@ -81,10 +75,45 @@ const Form = (props) => {
         Vehicles(id)
         .then(response => {
             if(response.status === 200){
-                //
+                setVehicles(response.data);
             }
         })
         .catch(error => alert(error));
+    }
+
+    const renderDropdownMakers = (data) => {
+        return (
+            <select id="dropdownMakers" className="form-control">
+                {
+                    data.map(m => 
+                        <option key={m.id} value={m.id}>{m.name}</option>    
+                    )
+                }
+            </select>
+        );
+    }
+
+    const renderDropdownModels = (data) => {
+        return (
+        <select id="dropdownModels" className="form-control">
+            {
+                data.map(m => 
+                    <option key={m.id} value={m.id}>{m.name}</option>    
+                )
+            }
+        </select>)
+    }
+
+    const renderDropdownVersions = (data) => {
+        return(
+            <select id="dropdownVersions" className="form-control">
+                {
+                    data.map(m => 
+                        <option key={m.id} value={m.id}>{m.name}</option>    
+                    )
+                }
+            </select>
+        );
     }
 
     return(<>
@@ -94,21 +123,21 @@ const Form = (props) => {
                     <div>
                         <label>Marca</label>
                     </div>
-                    <select id="dropdownMarcas" disabled={true} className="form-control"></select>
+                    {renderDropdownMakers(makers)}
                 </div>
 
                 <div className="col-md-4">
                     <div>
                         <label>Modelo</label>
                     </div>
-                    <select id="dropdownModelos" disabled={true} className="form-control"></select>
+                    {renderDropdownModels(models)}
                 </div>
 
                 <div className="col-md-4">
                     <div>
-                        <label>Versao</label>
+                        <label>Versão</label>
                     </div>
-                    <select id="dropdownVersoes" disabled={true} className="form-control"></select>
+                    {renderDropdownVersions(versions)}
                 </div>
             </div>
 
