@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Makers, Models, Versions } from "../../services/WebmotorsService";
+import { Create, Update } from "../../services/AdvertisingService";
 
 const Form = (props) => {
     const [id, setId] = useState(props.match.params.id || 0);
@@ -57,8 +58,8 @@ const Form = (props) => {
 
     const renderDropdownMakers = (data) => {
         return (
-            <select disabled={data.length === 0 ? true : false} id="dropdownMakers" className="form-control">
-                <option value="0">-- selecione --</option>
+            <select name="Marca" disabled={data.length === 0 ? true : false} id="dropdownMakers" className="form-control">
+                <option value="0">-- Select One --</option>
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -70,8 +71,7 @@ const Form = (props) => {
 
     const renderDropdownModels = (data) => {
         return (
-        <select disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control">
-            <option value="0">-- selecione --</option>
+        <select name="Modelo" disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control">
             {
                 data.map(m => 
                     <option key={m.id} value={m.id}>{m.name}</option>    
@@ -82,8 +82,7 @@ const Form = (props) => {
 
     const renderDropdownVersions = (data) => {
         return(
-            <select disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control">
-                <option value="0">-- selecione --</option>
+            <select name="Versao" disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control">
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -94,8 +93,50 @@ const Form = (props) => {
     }
     //#endregion
 
+    const handleSubmit = () => {
+        const form = document.getElementById("form");
+        
+        form.addEventListener("submit", (event) => {
+            event.preventDefault()
+        });
+
+        const data = {
+            marca: form.elements["Marca"].value,
+            modelo: form.elements["Modelo"].value,
+            versao: form.elements["Versao"].value,
+            ano: form.elements["Ano"].value,
+            quilometragem: form.elements["Quilometragem"].value,
+            observacao: form.elements["Observacao"].value
+        }
+
+        if(id === 0) {
+            Create(data)
+            .then(response => {
+                if(response.status === 200) {
+                    alert("Success!");
+
+                    props.history.goBack();
+                }
+            })
+            .catch(error => alert(error));
+        }
+        else {
+            data.id = id;
+
+            Update(data)
+            .then(response => {
+                if(response.status === 200) {
+                    alert("Success!");
+
+                    props.history.goBack();
+                }
+            })
+            .catch(error => alert(error));
+        }
+    }
+
     return(<>
-        <form>
+        <form id="form">
             <div className="row">
                 <div className="col-md-4">
                     <div>
@@ -144,7 +185,7 @@ const Form = (props) => {
 
             <div className="row mt-3">
                 <div className="col-md-6">
-                    <button className="btn btn-primary mr-1" type="submit">Save Changes</button>
+                    <button className="btn btn-primary mr-1" onClick={() => handleSubmit()}>Save Changes</button>
                     <button className="btn btn-danger mr-1" type="reset">Reset</button>
                     <button className="btn btn-dark" onClick={() => props.history.goBack()}>Back</button>
                 </div>

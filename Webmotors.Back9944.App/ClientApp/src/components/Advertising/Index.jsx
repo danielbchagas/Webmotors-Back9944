@@ -24,14 +24,17 @@ const Index = (props) => {
     }
 
     const remove = (id) => {
-        Delete(parseInt(id))
-        .then(response => {
-            if(response.status === 204)
-                alert("Excluído com sucesso!");
+        const confirm = window.confirm("Confirma a exclusão?");
+        
+        if(confirm === true)
+            Delete(parseInt(id))
+            .then(response => {
+                if(response.status === 204)
+                    alert("Excluído com sucesso!");
 
-            get();
-        })
-        .catch(error => alert(error));
+                get();
+            })
+            .catch(error => alert(error));
     }
 
     const renderTable = (data) => {
