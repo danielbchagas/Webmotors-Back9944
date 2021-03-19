@@ -4,21 +4,35 @@ import { Makers, Models, Versions, Vehicles } from "../../services/WebmotorsServ
 
 const Form = (props) => {
     const [id, setId] = useState(props.match.params.id || 0);
-
-    const [markers, setMakers] = useState([]);
-    const [models, setModels] = useState([]);
-    const [versions, setVersions] = useState([]);
-    const [vehicles, setVehicles] = useState([]);
     
     useEffect(() => {
         getMakers();
     }, []);
 
+    const montaDropdown = (element, data) => {
+        var option = new Option(data.name, data.id);
+        element.add(option);
+    }
+
+    const desmontaDropdown = (element) => {
+        //
+    }
+
     const getMakers = () => {
         Makers()
         .then(response => {
-            if(response.status === 200)
-                setMakers(response.data);
+            if(response.status === 200){
+                var dropdown = document.getElementById("dropdownMarcas");
+                
+                response.data.map(m => {
+                    montaDropdown(dropdown, m);
+                });
+                
+                dropdown.removeAttribute("disabled");
+                dropdown.addEventListener("change", (event) => {
+                    getModels(event.target.value);
+                }, false);
+            }
         })
         .catch(error => alert(error));
     }
@@ -26,8 +40,19 @@ const Form = (props) => {
     const getModels = (id) => {
         Models(id)
         .then(response => {
-            if(response.status === 200)
-                setModels(response.data);
+            if(response.status === 200){
+                var dropdown = document.getElementById("dropdownModelos");
+                
+                response.data.map(m => {
+                    desmontaDropdown(dropdown);
+                    montaDropdown(dropdown, m);
+                });
+                
+                dropdown.removeAttribute("disabled");
+                dropdown.addEventListener("change", (event) => {
+                getVersions(event.target.value);
+                }, false);
+            }
         })
         .catch(error => alert(error));
     }
@@ -35,8 +60,19 @@ const Form = (props) => {
     const getVersions = (id) => {
         Versions(id)
         .then(response => {
-            if(response.status === 200)
-                setVersions(response.data);
+            if(response.status === 200){
+                var dropdown = document.getElementById("dropdownVersoes");
+                
+                response.data.map(m => {
+                    desmontaDropdown(dropdown);
+                    montaDropdown(dropdown, m);
+                });
+                
+                dropdown.removeAttribute("disabled");
+                dropdown.addEventListener("change", (event) => {
+                // getVersions(event.target.value);
+                }, false);
+            }
         })
         .catch(error => alert(error));
     }
@@ -44,8 +80,9 @@ const Form = (props) => {
     const getVehicles = (id) => {
         Vehicles(id)
         .then(response => {
-            if(response.status === 200)
-                setVehicles(response.data);
+            if(response.status === 200){
+                //
+            }
         })
         .catch(error => alert(error));
     }
@@ -57,21 +94,21 @@ const Form = (props) => {
                     <div>
                         <label>Marca</label>
                     </div>
-                    <input className="form-control" name="Marca" type="text" required/>
+                    <select id="dropdownMarcas" disabled={true} className="form-control"></select>
                 </div>
 
                 <div className="col-md-4">
                     <div>
                         <label>Modelo</label>
                     </div>
-                    <input className="form-control" name="Modelo" type="text" required/>
+                    <select id="dropdownModelos" disabled={true} className="form-control"></select>
                 </div>
 
                 <div className="col-md-4">
                     <div>
                         <label>Versao</label>
                     </div>
-                    <input className="form-control" name="Versao" type="text" required/>
+                    <select id="dropdownVersoes" disabled={true} className="form-control"></select>
                 </div>
             </div>
 
