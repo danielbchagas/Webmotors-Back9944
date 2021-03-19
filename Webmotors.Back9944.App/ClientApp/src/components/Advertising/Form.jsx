@@ -72,6 +72,7 @@ const Form = (props) => {
     const renderDropdownModels = (data) => {
         return (
         <select name="Modelo" disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control">
+            <option value="0">-- Select One --</option>
             {
                 data.map(m => 
                     <option key={m.id} value={m.id}>{m.name}</option>    
@@ -83,6 +84,7 @@ const Form = (props) => {
     const renderDropdownVersions = (data) => {
         return(
             <select name="Versao" disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control">
+                <option value="0">-- Select One --</option>
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -97,7 +99,7 @@ const Form = (props) => {
         const form = document.getElementById("form");
         
         form.addEventListener("submit", (event) => {
-            event.preventDefault()
+            event.preventDefault();
         });
 
         const data = {
@@ -118,7 +120,7 @@ const Form = (props) => {
                     props.history.goBack();
                 }
             })
-            .catch(error => alert(error));
+            .catch(error => alert("Erro ao salvar!"));
         }
         else {
             data.id = id;
@@ -131,7 +133,7 @@ const Form = (props) => {
                     props.history.goBack();
                 }
             })
-            .catch(error => alert(error));
+            .catch(error => alert("Erro ao atualizar!"));
         }
     }
 
@@ -165,21 +167,21 @@ const Form = (props) => {
                     <div>
                         <label>Ano</label>
                     </div>
-                    <input className="form-control" name="Ano" type="number" required/>
+                    <input className="form-control" name="Ano" type="number"/>
                 </div>
 
                 <div className="col-md-2">
                     <div>
                         <label>Quilometragem</label>
                     </div>
-                    <input className="form-control" name="Quilometragem" type="number" required/>
+                    <input className="form-control" name="Quilometragem" type="number"/>
                 </div>
 
                 <div className="col-md-8">
                     <div>
                         <label>Observacao</label>
                     </div>
-                    <textarea rows={5} className="form-control" name="Observacao" type="text" required/>
+                    <textarea rows={5} className="form-control" name="Observacao" type="text"/>
                 </div>
             </div>
 
