@@ -1,21 +1,85 @@
 ﻿import React, { useEffect, useState } from "react";
 
-import { Get } from "../../services/AdvertisingService";
+import { Get, Delete } from "../../services/AdvertisingService";
 
-const Index = () => {
+const Index = (props) => {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         get();
     }, []);
 
     const get = () => {
-        const data = Get();
-        setData(data);
+        Get()
+        .then(response => {
+            setLoading(true);
+
+            if(response.status === 200)
+                setData(response.data);
+
+            setLoading(false);
+        })
+        .catch(error => alert(error));
     }
 
+    const remove = (id) => {
+        Delete(parseInt(id))
+        .then(response => {
+            if(response.status === 204)
+                alert("Excluído com sucesso!");
+
+            get();
+        })
+        .catch(error => alert(error));
+    }
+
+    const renderTable = (data) => {
+        return (
+          <>
+            <div>
+                <button className="btn btn-primary" onClick={() => props.history.push("/form-advertising")}>New</button>
+            </div>
+
+            <table className='table table-striped' aria-labelledby="tabelLabel">
+                <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Versão</th>
+                    <th>Ano</th>
+                    <th>Quilometragem</th>
+                    <th>Observacao</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {data.map(m =>
+                    <tr key={m.id}>
+                    <td>{m.marca}</td>
+                    <td>{m.modelo}</td>
+                    <td>{m.versao}</td>
+                    <td>{m.ano}</td>
+                    <td>{m.quilometragem}</td>
+                    <td>{m.observacao}</td>
+                    <td>
+                        <button className="btn btn-danger mr-1" onClick={() => props.history.push("/form-advertising/" + m.id)}>Update</button>
+                        <button className="btn btn-primary" onClick={() => remove(m.id)}>Delete</button>
+                    </td>
+                    </tr>
+                )}
+                </tbody>
+            </table>
+          </>
+        );
+      }
+
     return (<>
-        Em desenvolvimento...
+        {
+            loading === true
+            ? "Loading..."
+            : renderTable(data)
+        }
     </>);
 }
 
