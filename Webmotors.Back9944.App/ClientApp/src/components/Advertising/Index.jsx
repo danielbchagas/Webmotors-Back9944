@@ -37,7 +37,7 @@ const Index = (props) => {
     const renderTable = (data) => {
         return (
           <>
-            <div>
+            <div className="mb-3">
                 <button className="btn btn-primary" onClick={() => props.history.push("/form-advertising")}>New</button>
             </div>
 
