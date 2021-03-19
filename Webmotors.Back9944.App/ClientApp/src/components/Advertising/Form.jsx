@@ -174,7 +174,7 @@ const Form = (props) => {
                     <div>
                         <label>Quilometragem</label>
                     </div>
-                    <input className="form-control" name="Quilometragem" type="number"/>
+                    <input className="form-control" name="Quilometragem" type="number" step="0.1"/>
                 </div>
 
                 <div className="col-md-8">
@@ -189,7 +189,7 @@ const Form = (props) => {
                 <div className="col-md-6">
                     <button className="btn btn-primary mr-1" onClick={() => handleSubmit()}>Save Changes</button>
                     <button className="btn btn-danger mr-1" type="reset">Reset</button>
-                    <button className="btn btn-dark" onClick={() => props.history.goBack()}>Back</button>
+                    <button className="btn btn-dark" onClick={() => props.history.push("/advertising")}>Back</button>
                 </div>
             </div>
         </form>
