@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Makers, Models, Versions } from "../../services/WebmotorsService";
-import { Create, Update } from "../../services/AdvertisingService";
+import { Create, Update, GetById } from "../../services/AdvertisingService";
 
 const Form = (props) => {
     const [id, setId] = useState(props.match.params.id || 0);
@@ -9,12 +9,26 @@ const Form = (props) => {
     const [models, setModels] = useState([]);
     const [versions, setVersions] = useState([]);
 
+    const [current, setCurrent] = useState({});
+
     useEffect(() => {
+        getCurrentAdvertising();
+
         // Makers
         getMakers();
         const dropdown = document.getElementById("dropdownMakers");
         mountDropdown(dropdown, getModels);
     }, []);
+
+    const getCurrentAdvertising = () => {
+        GetById(id)
+        .then(response => {
+            if(response.status === 200) {
+                setCurrent(response.data);
+            }
+        })
+        .catch(error => alert(error));
+    }
 
     const getMakers = () => {
         Makers()
@@ -59,7 +73,7 @@ const Form = (props) => {
     const renderDropdownMakers = (data) => {
         return (
             <select name="Marca" disabled={data.length === 0 ? true : false} id="dropdownMakers" className="form-control">
-                <option value="0">-- Select One --</option>
+                <option value="0">-- Selecione --</option>
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -72,7 +86,7 @@ const Form = (props) => {
     const renderDropdownModels = (data) => {
         return (
         <select name="Modelo" disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control">
-            <option value="0">-- Select One --</option>
+            <option value="0">-- Selecione --</option>
             {
                 data.map(m => 
                     <option key={m.id} value={m.id}>{m.name}</option>    
@@ -84,7 +98,7 @@ const Form = (props) => {
     const renderDropdownVersions = (data) => {
         return(
             <select name="Versao" disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control">
-                <option value="0">-- Select One --</option>
+                <option value="0">-- Selecione --</option>
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -167,21 +181,21 @@ const Form = (props) => {
                     <div>
                         <label>Ano</label>
                     </div>
-                    <input className="form-control" name="Ano" type="number"/>
+                    <input className="form-control" name="Ano" type="number" min={0} defaultValue={current.ano}/>
                 </div>
 
                 <div className="col-md-2">
                     <div>
                         <label>Quilometragem</label>
                     </div>
-                    <input className="form-control" name="Quilometragem" type="number" step="0.1"/>
+                    <input className="form-control" name="Quilometragem" type="number" min={0} defaultValue={current.quilometragem}/>
                 </div>
 
                 <div className="col-md-8">
                     <div>
                         <label>Observacao</label>
                     </div>
-                    <textarea rows={5} className="form-control" name="Observacao" type="text"/>
+                    <textarea rows={5} className="form-control" name="Observacao" type="text" defaultValue={current.observacao}/>
                 </div>
             </div>
 
