@@ -9,7 +9,7 @@ const Form = (props) => {
     const [models, setModels] = useState([]);
     const [versions, setVersions] = useState([]);
 
-    const [current, setCurrent] = useState({});
+    const [current, setCurrent] = useState(null);
 
     useEffect(() => {
         getCurrentAdvertising();
@@ -152,6 +152,24 @@ const Form = (props) => {
     }
 
     return(<>
+        {
+            current !== null 
+            ? <div className="card mb-3">
+                <div className="card-body">
+                    <h5>Sobre o anúncio:</h5>
+                    
+                    <div><strong>Marca:</strong> {current.marca}</div>
+                    <div><strong>Modelo:</strong> {current.modelo}</div>
+                    <div><strong>Versão:</strong> {current.versao}</div>
+                    <div><strong>Ano:</strong> {current.ano}</div>
+                    <div><strong>Quilometragem:</strong> {current.quilometragem}</div>
+                    <div><strong>Observações:</strong> {current.observacao}</div>
+                </div>
+            </div>  
+            : ""
+        }
+        
+
         <form id="form">
             <div className="row">
                 <div className="col-md-4">
@@ -181,21 +199,21 @@ const Form = (props) => {
                     <div>
                         <label>Ano</label>
                     </div>
-                    <input className="form-control" name="Ano" type="number" min={0} defaultValue={current.ano}/>
+                    <input className="form-control" name="Ano" type="number" min={0}/>
                 </div>
 
                 <div className="col-md-2">
                     <div>
                         <label>Quilometragem</label>
                     </div>
-                    <input className="form-control" name="Quilometragem" type="number" min={0} defaultValue={current.quilometragem}/>
+                    <input className="form-control" name="Quilometragem" type="number" min={0}/>
                 </div>
 
                 <div className="col-md-8">
                     <div>
                         <label>Observacao</label>
                     </div>
-                    <textarea rows={5} className="form-control" name="Observacao" type="text" defaultValue={current.observacao}/>
+                    <textarea rows={5} className="form-control" name="Observacao" type="text"/>
                 </div>
             </div>
 
