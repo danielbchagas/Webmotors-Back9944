@@ -3,8 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Makers, Models, Versions } from "../../services/WebmotorsService";
 import { Create, Update, GetById } from "../../services/AdvertisingService";
 
+import DropdownVersion from "./DropdownVersion";
+import DropdownModel from "./DropdownModel";
+import DropdownMaker from "./DropdownMaker";
+import ResumeCard from "./ResumeCard";
+
 const Form = (props) => {
-    const [id, setId] = useState(props.match.params.id || 0);
+    const id = props.match.params.id || 0;
+
     const [makers, setMakers] = useState([]);
     const [models, setModels] = useState([]);
     const [versions, setVersions] = useState([]);
@@ -63,69 +69,12 @@ const Form = (props) => {
         .catch(error => alert(error));
     }
 
-    //#region Dropdowns
     const mountDropdown = (element, callback) => {
         element.addEventListener("change", (event) => {
             callback(event.target.value);
         }, false);
     };
-
-    const renderDropdownMakers = (data) => {
-        return (
-            <select name="Marca" disabled={data.length === 0 ? true : false} id="dropdownMakers" className="form-control" required>
-                <option value="">-- Selecione --</option>
-                {
-                    data.map(m => 
-                        <option key={m.id} value={m.id}>{m.name}</option>    
-                    )
-                }
-            </select>
-        );
-    }
-
-    const renderDropdownModels = (data) => {
-        return (
-        <select name="Modelo" disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control" required>
-            <option value="">-- Selecione --</option>
-            {
-                data.map(m => 
-                    <option key={m.id} value={m.id}>{m.name}</option>    
-                )
-            }
-        </select>)
-    }
-
-    const renderDropdownVersions = (data) => {
-        return(
-            <select name="Versao" disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control" required>
-                <option value="">-- Selecione --</option>
-                {
-                    data.map(m => 
-                        <option key={m.id} value={m.id}>{m.name}</option>    
-                    )
-                }
-            </select>
-        );
-    }
-    //#endregion
-
-    const renderResumeCard = (data) => {
-        return (
-            <div className="card mb-3">
-                <div className="card-body">
-                    <h5>Resumo do anúncio:</h5>
-                    
-                    <div><strong>Marca:</strong> {data.marca}</div>
-                    <div><strong>Modelo:</strong> {data.modelo}</div>
-                    <div><strong>Versão:</strong> {data.versao}</div>
-                    <div><strong>Ano:</strong> {data.ano}</div>
-                    <div><strong>Quilometragem:</strong> {data.quilometragem}</div>
-                    <div><strong>Observações:</strong> {data.observacao}</div>
-                </div>
-            </div>
-        );
-    }
-
+    
     const handleSubmit = () => {
         const form = document.getElementById("form");
         
@@ -143,6 +92,10 @@ const Form = (props) => {
         }
 
         if(data.marca === "" || data.modelo === "" || data.versao === "" || data.ano === "" || data.quilometragem === "" || data.observacao === "") return;
+
+        const confirm = window.confirm("Enviar?");
+
+        if(confirm === false) return;
 
         if(id === 0) {
             Create(data)
@@ -173,7 +126,7 @@ const Form = (props) => {
     return(<>
         {
             current !== null 
-            ? renderResumeCard(current)
+            ? <ResumeCard data={current}/>
             : ""
         }
 
@@ -183,21 +136,21 @@ const Form = (props) => {
                     <div>
                         <label>Marca</label>
                     </div>
-                    {renderDropdownMakers(makers)}
+                    <DropdownMaker data={makers}/>
                 </div>
 
                 <div className="col-md-4">
                     <div>
                         <label>Modelo</label>
                     </div>
-                    {renderDropdownModels(models)}
+                    <DropdownModel data={models}/>
                 </div>
 
                 <div className="col-md-4">
                     <div>
                         <label>Versão</label>
                     </div>
-                    {renderDropdownVersions(versions)}
+                    <DropdownVersion data={versions} />
                 </div>
             </div>
 
