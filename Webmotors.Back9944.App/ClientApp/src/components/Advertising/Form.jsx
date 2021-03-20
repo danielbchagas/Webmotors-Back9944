@@ -72,8 +72,8 @@ const Form = (props) => {
 
     const renderDropdownMakers = (data) => {
         return (
-            <select name="Marca" disabled={data.length === 0 ? true : false} id="dropdownMakers" className="form-control">
-                <option value="0">-- Selecione --</option>
+            <select name="Marca" disabled={data.length === 0 ? true : false} id="dropdownMakers" className="form-control" required>
+                <option value="">-- Selecione --</option>
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -85,8 +85,8 @@ const Form = (props) => {
 
     const renderDropdownModels = (data) => {
         return (
-        <select name="Modelo" disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control">
-            <option value="0">-- Selecione --</option>
+        <select name="Modelo" disabled={data.length === 0 ? true : false} id="dropdownModels" className="form-control" required>
+            <option value="">-- Selecione --</option>
             {
                 data.map(m => 
                     <option key={m.id} value={m.id}>{m.name}</option>    
@@ -97,8 +97,8 @@ const Form = (props) => {
 
     const renderDropdownVersions = (data) => {
         return(
-            <select name="Versao" disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control">
-                <option value="0">-- Selecione --</option>
+            <select name="Versao" disabled={data.length === 0 ? true : false} id="dropdownVersions" className="form-control" required>
+                <option value="">-- Selecione --</option>
                 {
                     data.map(m => 
                         <option key={m.id} value={m.id}>{m.name}</option>    
@@ -109,6 +109,23 @@ const Form = (props) => {
     }
     //#endregion
 
+    const renderResumeCard = (data) => {
+        return (
+            <div className="card mb-3">
+                <div className="card-body">
+                    <h5>Resumo do anúncio:</h5>
+                    
+                    <div><strong>Marca:</strong> {data.marca}</div>
+                    <div><strong>Modelo:</strong> {data.modelo}</div>
+                    <div><strong>Versão:</strong> {data.versao}</div>
+                    <div><strong>Ano:</strong> {data.ano}</div>
+                    <div><strong>Quilometragem:</strong> {data.quilometragem}</div>
+                    <div><strong>Observações:</strong> {data.observacao}</div>
+                </div>
+            </div>
+        );
+    }
+
     const handleSubmit = () => {
         const form = document.getElementById("form");
         
@@ -116,7 +133,7 @@ const Form = (props) => {
             event.preventDefault();
         });
 
-        const data = {
+        let data = {
             marca: form.elements["Marca"].value,
             modelo: form.elements["Modelo"].value,
             versao: form.elements["Versao"].value,
@@ -125,11 +142,13 @@ const Form = (props) => {
             observacao: form.elements["Observacao"].value
         }
 
+        if(data.marca === "" || data.modelo === "" || data.versao === "" || data.ano === "" || data.quilometragem === "" || data.observacao === "") return;
+
         if(id === 0) {
             Create(data)
             .then(response => {
                 if(response.status === 200) {
-                    alert("Success!");
+                    alert("Sucesso!");
 
                     props.history.goBack();
                 }
@@ -142,7 +161,7 @@ const Form = (props) => {
             Update(data)
             .then(response => {
                 if(response.status === 200) {
-                    alert("Success!");
+                    alert("Sucesso!");
 
                     props.history.goBack();
                 }
@@ -154,21 +173,9 @@ const Form = (props) => {
     return(<>
         {
             current !== null 
-            ? <div className="card mb-3">
-                <div className="card-body">
-                    <h5>Sobre o anúncio:</h5>
-                    
-                    <div><strong>Marca:</strong> {current.marca}</div>
-                    <div><strong>Modelo:</strong> {current.modelo}</div>
-                    <div><strong>Versão:</strong> {current.versao}</div>
-                    <div><strong>Ano:</strong> {current.ano}</div>
-                    <div><strong>Quilometragem:</strong> {current.quilometragem}</div>
-                    <div><strong>Observações:</strong> {current.observacao}</div>
-                </div>
-            </div>  
+            ? renderResumeCard(current)
             : ""
         }
-        
 
         <form id="form">
             <div className="row">
@@ -199,21 +206,21 @@ const Form = (props) => {
                     <div>
                         <label>Ano</label>
                     </div>
-                    <input className="form-control" name="Ano" type="number" min={0}/>
+                    <input className="form-control" name="Ano" type="number" min={0} required/>
                 </div>
 
                 <div className="col-md-2">
                     <div>
                         <label>Quilometragem</label>
                     </div>
-                    <input className="form-control" name="Quilometragem" type="number" min={0}/>
+                    <input className="form-control" name="Quilometragem" type="number" min={0} required/>
                 </div>
 
                 <div className="col-md-8">
                     <div>
                         <label>Observacao</label>
                     </div>
-                    <textarea rows={5} className="form-control" name="Observacao" type="text"/>
+                    <textarea rows={5} className="form-control" name="Observacao" type="text" required/>
                 </div>
             </div>
 
