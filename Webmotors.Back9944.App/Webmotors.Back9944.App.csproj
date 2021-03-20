@@ -9,6 +9,7 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <AssemblyName>Webmotors.Back9944.App</AssemblyName>
     <RootNamespace>Webmotors.Back9944.App</RootNamespace>
+    <UserSecretsId>675db076-7544-432a-ae75-9b412d8be16f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
