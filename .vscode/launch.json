@@ -13,9 +13,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             "OS-COMMENT4": "If you have changed target frameworks, make sure to update the program path.",
-            "program": "${workspaceFolder}/Webmotors.Back9944.App/bin/Debug/net5.0/Webmotors.Back9944.App.dll",
+            "program": "${workspaceFolder}/src/Webmotors.Back9944.App/bin/Debug/net5.0/Webmotors.Back9944.App.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Webmotors.Back9944.App",
+            "cwd": "${workspaceFolder}/src/Webmotors.Back9944.App",
             "stopAtEntry": false,
             "OS-COMMENT5": "Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser",
             "serverReadyAction": {

@@ -3,15 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.App", "Webmotors.Back9944.App\Webmotors.Back9944.App.csproj", "{2A333F5E-A26D-475D-B2F6-19BD6CC47DD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.App", "src\Webmotors.Back9944.App\Webmotors.Back9944.App.csproj", "{2A333F5E-A26D-475D-B2F6-19BD6CC47DD2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.Data", "Webmotors.Back9944.Data\Webmotors.Back9944.Data.csproj", "{00AF8095-117F-4FCB-A636-58DC21851A53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.Data", "src\Webmotors.Back9944.Data\Webmotors.Back9944.Data.csproj", "{00AF8095-117F-4FCB-A636-58DC21851A53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.Business", "Webmotors.Back9944.Business\Webmotors.Back9944.Business.csproj", "{E11682BD-10BF-4655-8515-FA73BC4049BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.Business", "src\Webmotors.Back9944.Business\Webmotors.Back9944.Business.csproj", "{E11682BD-10BF-4655-8515-FA73BC4049BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{96C29CDC-42D5-45D4-8D2F-99878F1E09AB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{96C29CDC-42D5-45D4-8D2F-99878F1E09AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webmotors.Back9944.App.Tests", "Tests\Webmotors.Back9944.App.Tests\Webmotors.Back9944.App.Tests.csproj", "{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.App.Tests", "tests\Webmotors.Back9944.App.Tests\Webmotors.Back9944.App.Tests.csproj", "{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C55BE882-20B4-4695-AF49-7255FEEB18A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{89BD1185-5BC3-41C7-8A1C-6640E328EF83}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Back9944.pdf = docs\Back9944.pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +47,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{2A333F5E-A26D-475D-B2F6-19BD6CC47DD2} = {C55BE882-20B4-4695-AF49-7255FEEB18A0}
+		{00AF8095-117F-4FCB-A636-58DC21851A53} = {C55BE882-20B4-4695-AF49-7255FEEB18A0}
+		{E11682BD-10BF-4655-8515-FA73BC4049BA} = {C55BE882-20B4-4695-AF49-7255FEEB18A0}
 		{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B} = {96C29CDC-42D5-45D4-8D2F-99878F1E09AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

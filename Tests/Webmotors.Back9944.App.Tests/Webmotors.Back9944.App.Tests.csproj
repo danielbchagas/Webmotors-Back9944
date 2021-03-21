@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Webmotors.Back9944.App\Webmotors.Back9944.App.csproj" />
+    <ProjectReference Include="..\..\src\Webmotors.Back9944.App\Webmotors.Back9944.App.csproj" />
   </ItemGroup>
 
 </Project>

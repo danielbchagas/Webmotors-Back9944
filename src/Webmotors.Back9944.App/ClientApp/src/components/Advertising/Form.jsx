@@ -171,7 +171,7 @@ const Form = (props) => {
 
                 <div className="col-md-8">
                     <div>
-                        <label>Observacao</label>
+                        <label>Observação</label>
                     </div>
                     <textarea rows={5} className="form-control" name="Observacao" type="text" required/>
                 </div>
@@ -179,9 +179,14 @@ const Form = (props) => {
 
             <div className="row mt-3">
                 <div className="col-md-6">
-                    <button className="btn btn-primary mr-1" onClick={() => handleSubmit()}>Save Changes</button>
-                    <button className="btn btn-danger mr-1" type="reset">Reset</button>
-                    <button className="btn btn-dark" onClick={() => props.history.push("/advertising")}>Back</button>
+                    <button className="btn btn-primary mr-1" onClick={() => handleSubmit()}>
+                        <i className="fa fa-save"></i> Salvar
+                    </button>
+                    <button className="btn btn-danger mr-1" type="reset">
+                        <i className="fa fa-ban"></i> Limpar</button>
+                    <button className="btn btn-dark" onClick={() => props.history.push("/advertising")}>
+                        <i class="fa fa-arrow-circle-left"></i> Voltar
+                    </button>
                 </div>
             </div>
         </form>

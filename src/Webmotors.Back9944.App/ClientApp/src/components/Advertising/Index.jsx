@@ -41,7 +41,9 @@ const Index = (props) => {
         return (
           <>
             <div className="mb-3">
-                <button className="btn btn-primary" onClick={() => props.history.push("/form-advertising")}>New</button>
+                <button className="btn btn-primary" onClick={() => props.history.push("/form-advertising")}>
+                    <i className="fa fa-plus"></i> Novo Anúncio
+                </button>
             </div>
 
             <table className='table table-striped' aria-labelledby="tabelLabel">
@@ -52,8 +54,8 @@ const Index = (props) => {
                     <th>Versão</th>
                     <th>Ano</th>
                     <th>Quilometragem</th>
-                    <th>Observacao</th>
-                    <th>Actions</th>
+                    <th>Observação</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,8 +68,12 @@ const Index = (props) => {
                     <td>{m.quilometragem}</td>
                     <td>{m.observacao}</td>
                     <td>
-                        <button className="btn btn-danger mr-1" onClick={() => props.history.push("/form-advertising/" + m.id)}>Update</button>
-                        <button className="btn btn-primary" onClick={() => remove(m.id)}>Delete</button>
+                        <button className="btn btn-danger mr-1" onClick={() => props.history.push("/form-advertising/" + m.id)}>
+                            <i className="fa fa-edit"></i> Editar
+                        </button>
+                        <button className="btn btn-primary" onClick={() => remove(m.id)}>
+                            <i className="fa fa-trash"></i> Excluir
+                        </button>
                     </td>
                     </tr>
                 )}
