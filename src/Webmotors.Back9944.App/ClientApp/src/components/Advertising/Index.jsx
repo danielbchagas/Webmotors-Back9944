@@ -13,14 +13,12 @@ const Index = (props) => {
     }, []);
 
     const get = () => {
+        setLoading(true);
+        
         Get()
         .then(response => {
-            setLoading(true);
-
             if(response.status === 200)
                 setData(response.data);
-
-            setLoading(false);
         })
         .catch(error => {
             Swal.fire({
@@ -28,6 +26,8 @@ const Index = (props) => {
                 text: "Houve um erro com a operação!"
             });
         });
+
+        setLoading(false);
     }
 
     const remove = (id) => {
@@ -76,37 +76,37 @@ const Index = (props) => {
 
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
-                <tr>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Versão</th>
-                    <th>Ano</th>
-                    <th>Quilometragem</th>
-                    <th>Observação</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {data.map(m =>
-                    <tr key={m.id}>
-                    <td>{m.marca}</td>
-                    <td>{m.modelo}</td>
-                    <td>{m.versao}</td>
-                    <td>{m.ano}</td>
-                    <td>{m.quilometragem}</td>
-                    <td>{m.observacao}</td>
-                    <td>
-                        <button className="btn btn-danger mr-1" onClick={() => props.history.push("/form-advertising/" + m.id)}>
-                            <i className="fa fa-edit"></i> Editar
-                        </button>
-                        <button className="btn btn-primary" onClick={() => remove(m.id)}>
-                            <i className="fa fa-trash"></i> Excluir
-                        </button>
-                    </td>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Versão</th>
+                        <th>Ano</th>
+                        <th>Quilometragem</th>
+                        <th>Observação</th>
+                        <th>Ações</th>
                     </tr>
-                )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {data.map(m =>
+                        <tr key={m.id}>
+                        <td>{m.marca}</td>
+                        <td>{m.modelo}</td>
+                        <td>{m.versao}</td>
+                        <td>{m.ano}</td>
+                        <td>{m.quilometragem}</td>
+                        <td>{m.observacao}</td>
+                        <td>
+                            <button className="btn btn-danger mr-1" onClick={() => props.history.push("/form-advertising/" + m.id)}>
+                                <i className="fa fa-edit"></i> Editar
+                            </button>
+                            <button className="btn btn-primary" onClick={() => remove(m.id)}>
+                                <i className="fa fa-trash"></i> Excluir
+                            </button>
+                        </td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
           </>
         );
       }
@@ -114,7 +114,7 @@ const Index = (props) => {
     return (<>
         {
             loading === true
-            ? "Loading..."
+            ? <p><em>Loading...</em></p>
             : renderTable(data)
         }
     </>);

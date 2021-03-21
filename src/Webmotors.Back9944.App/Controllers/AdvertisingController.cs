@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Services;
@@ -21,52 +22,89 @@ namespace Webmotors.Back9944.App.Controllers
         [Route("Get")]
         public async Task<IActionResult> Get()
         {
-            var result = await _service.Get();
-            return Ok(result);
+            try
+            {
+                var result = await _service.Get();
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
         [Route("GetById/{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var result = await _service.Get(id);
-            return Ok(result);
+            try
+            {
+                var result = await _service.Get(id);
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPost]
         [Route("Create")]
         public async Task<IActionResult> Post(Advertising advertising)
         {
-            await _service.Create(advertising);
-            var errors = _service.GetErrors();
+            try
+            {
+                await _service.Create(advertising);
+                var errors = _service.GetErrors();
 
-            if (errors.Count() > 0)
-                return BadRequest(errors);
+                if (errors.Count() > 0)
+                    return BadRequest(errors);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPut]
         [Route("Update")]
         public async Task<IActionResult> Put(Advertising advertising)
         {
-            await _service.Update(advertising);
-            var errors = _service.GetErrors();
+            try
+            {
+                await _service.Update(advertising);
+                var errors = _service.GetErrors();
 
-            if (errors.Count() > 0)
-                return BadRequest(errors);
+                if (errors.Count() > 0)
+                    return BadRequest(errors);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpDelete]
         [Route("Delete/{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _service.Get(id);
-            await _service.Delete(result);
+            try
+            {
+                var result = await _service.Get(id);
+                await _service.Delete(result);
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

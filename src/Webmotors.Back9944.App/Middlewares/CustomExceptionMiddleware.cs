@@ -24,7 +24,6 @@ namespace Webmotors.Back9944.App.Middlewares
             }
             catch (Exception e)
             {
-                await http.Response.WriteAsJsonAsync($"Houve um problema com a requisição! Detalhes: {e.Message}");
                 _logger.LogError(e, $"Exceção gerada em: {DateTime.Now}", e.Message);
             }
         }

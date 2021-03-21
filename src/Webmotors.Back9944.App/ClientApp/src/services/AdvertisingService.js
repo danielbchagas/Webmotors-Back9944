@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const http = axios.create({
     baseURL: "Advertising",
-    timeout: 30000,
+    // timeout: 30000,
     headers: {"Content-type": "application/json"}
 });
 
