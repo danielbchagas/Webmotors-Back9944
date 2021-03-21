@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Swal from "sweetalert2";
+
 import { Makers, Models, Versions } from "../../services/WebmotorsService";
 import { Create, Update, GetById } from "../../services/AdvertisingService";
 
@@ -74,6 +76,49 @@ const Form = (props) => {
             callback(event.target.value);
         }, false);
     };
+
+    const saveChanges = (data) => {
+        if(data.id === 0) {
+            Create(data)
+            .then(response => {
+                if(response.status === 200) {
+                    Swal.fire({
+                        title: 'Pronto!',
+                        text: 'Anúncio salvo com sucesso!',
+                        icon: 'success'
+                    })
+                    .then(result => {
+                        if(result.isConfirmed) {
+                            props.history.goBack();
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire("Houve um erro com a operação!");
+            });
+        }
+        else {
+            Update(data)
+            .then(response => {
+                if(response.status === 200) {
+                    Swal.fire({
+                        title: 'Pronto!',
+                        text: 'Anúncio salvo com sucesso!',
+                        icon: 'success'
+                    })
+                    .then(result => {
+                        if(result.isConfirmed) {
+                            props.history.goBack();
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire("Houve um erro com a operação!");
+            });
+        }
+    }
     
     const handleSubmit = () => {
         const form = document.getElementById("form");
@@ -82,7 +127,8 @@ const Form = (props) => {
             event.preventDefault();
         });
 
-        let data = {
+        const data = {
+            id: id,
             marca: form.elements["Marca"].value,
             modelo: form.elements["Modelo"].value,
             versao: form.elements["Versao"].value,
@@ -93,34 +139,20 @@ const Form = (props) => {
 
         if(data.marca === "" || data.modelo === "" || data.versao === "" || data.ano === "" || data.quilometragem === "" || data.observacao === "") return;
 
-        const confirm = window.confirm("Enviar?");
-
-        if(confirm === false) return;
-
-        if(id === 0) {
-            Create(data)
-            .then(response => {
-                if(response.status === 200) {
-                    alert("Sucesso!");
-
-                    props.history.goBack();
-                }
-            })
-            .catch(error => alert("Erro ao salvar!"));
-        }
-        else {
-            data.id = id;
-
-            Update(data)
-            .then(response => {
-                if(response.status === 200) {
-                    alert("Sucesso!");
-
-                    props.history.goBack();
-                }
-            })
-            .catch(error => alert("Erro ao atualizar!"));
-        }
+        
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "O anúncio será cadastrado.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, continue!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                saveChanges(data);
+            }
+          })
     }
 
     return(<>

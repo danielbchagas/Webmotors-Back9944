@@ -1,5 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 
+import Swal from "sweetalert2";
+
 import { Get, Delete } from "../../services/AdvertisingService";
 
 const Index = (props) => {
@@ -20,26 +22,46 @@ const Index = (props) => {
 
             setLoading(false);
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            Swal.fire("Houve um erro com a operação!");
+        });
     }
 
     const remove = (id) => {
-        const confirm = window.confirm("Confirma a exclusão?");
-        
-        if(confirm === true)
-            Delete(parseInt(id))
-            .then(response => {
-                if(response.status === 204)
-                    alert("Excluído com sucesso!");
-
-                get();
-            })
-            .catch(error => alert(error));
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "A exclusão não pode ser desfeita!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, continue!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Delete(parseInt(id))
+                .then(response => {
+                    if(response.status === 204)
+                        Swal.fire({
+                            title: "Excluído com sucesso!",
+                            icon: "success"
+                        });
+    
+                    get();
+                })
+                .catch(error => {
+                    Swal.fire("Houve um erro com a operação!");
+                });
+            }
+          });
     }
 
     const renderTable = (data) => {
         return (
           <>
+            <div className="mb-5">
+                <h3><strong>Tela de anúncios</strong></h3>
+            </div>
+
             <div className="mb-3">
                 <button className="btn btn-primary" onClick={() => props.history.push("/form-advertising")}>
                     <i className="fa fa-plus"></i> Novo Anúncio
