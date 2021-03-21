@@ -13,8 +13,7 @@ namespace Webmotors.Back9944.App.Tests
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseStartup<TStartUp>();
-            builder.UseEnvironment("Testing");
-
+            
             base.ConfigureWebHost(builder);
         }
     }

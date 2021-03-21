@@ -9,12 +9,12 @@ using Version = Webmotors.Back9944.Business.Models.Version;
 
 namespace Webmotors.Back9944.App.Tests
 {
-    public class AppServicesController : IClassFixture<WebApplicationFactory<Startup>>
+    public class App_ServicesController : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
         private HttpClient _http;
 
-        public AppServicesController(WebApplicationFactory<Startup> factory)
+        public App_ServicesController(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
