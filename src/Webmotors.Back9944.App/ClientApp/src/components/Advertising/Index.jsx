@@ -23,7 +23,10 @@ const Index = (props) => {
             setLoading(false);
         })
         .catch(error => {
-            Swal.fire("Houve um erro com a operação!");
+            Swal.fire({
+                icon: "error",
+                text: "Houve um erro com a operação!"
+            });
         });
     }
 
@@ -49,7 +52,10 @@ const Index = (props) => {
                     get();
                 })
                 .catch(error => {
-                    Swal.fire("Houve um erro com a operação!");
+                    Swal.fire({
+                        icon: "error",
+                        text: "Houve um erro com a operação!"
+                    });
                 });
             }
           });

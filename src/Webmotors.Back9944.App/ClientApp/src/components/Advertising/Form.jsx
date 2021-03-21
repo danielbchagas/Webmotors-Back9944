@@ -35,7 +35,12 @@ const Form = (props) => {
                 setCurrent(response.data);
             }
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            Swal.fire({
+                icon: "error",
+                text: "Houve um erro com a operação!"
+            });
+        });
     }
 
     const getMakers = () => {
@@ -45,7 +50,12 @@ const Form = (props) => {
                 setMakers(response.data);
             }
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            Swal.fire({
+                icon: "error",
+                text: "Houve um erro com a operação!"
+            });
+        });
     }
 
     const getModels = (id) => {
@@ -55,7 +65,12 @@ const Form = (props) => {
                 setModels(response.data);
             }
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            Swal.fire({
+                icon: "error",
+                text: "Houve um erro com a operação!"
+            });
+        });
 
         const dropdown = document.getElementById("dropdownModels");
         mountDropdown(dropdown, getVersions);
@@ -68,7 +83,12 @@ const Form = (props) => {
                 setVersions(response.data);
             }
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            Swal.fire({
+                icon: "error",
+                text: "Houve um erro com a operação!"
+            });
+        });
     }
 
     const mountDropdown = (element, callback) => {
@@ -95,7 +115,10 @@ const Form = (props) => {
                 }
             })
             .catch(error => {
-                Swal.fire("Houve um erro com a operação!");
+                Swal.fire({
+                    icon: "error",
+                    text: "Houve um erro com a operação!"
+                });
             });
         }
         else {
@@ -115,7 +138,10 @@ const Form = (props) => {
                 }
             })
             .catch(error => {
-                Swal.fire("Houve um erro com a operação!");
+                Swal.fire({
+                    icon: "error",
+                    text: "Houve um erro com a operação!"
+                });
             });
         }
     }
