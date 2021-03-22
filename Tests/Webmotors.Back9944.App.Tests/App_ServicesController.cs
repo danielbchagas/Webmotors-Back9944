@@ -17,6 +17,7 @@ namespace Webmotors.Back9944.App.Tests
         public App_ServicesController(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
+            _http = _factory.CreateClient();
         }
 
         [Theory]
@@ -24,7 +25,6 @@ namespace Webmotors.Back9944.App.Tests
         public async Task Get_EndpointsReturnMakers(string url)
         {
             // Arrange
-            _http = _factory.CreateClient();
             HttpResponseMessage response = await _http.GetAsync(url);
 
             // Act
@@ -43,7 +43,6 @@ namespace Webmotors.Back9944.App.Tests
         public async Task Get_EndpointsReturnModels(string url)
         {
             // Arrange
-            _http = _factory.CreateClient();
             HttpResponseMessage response = await _http.GetAsync(url);
 
             // Act
@@ -62,7 +61,6 @@ namespace Webmotors.Back9944.App.Tests
         public async Task Get_EndpointsReturnVehicles(string url)
         {
             // Arrange
-            _http = _factory.CreateClient();
             HttpResponseMessage response = await _http.GetAsync(url);
 
             // Act
@@ -80,7 +78,6 @@ namespace Webmotors.Back9944.App.Tests
         public async Task Get_EndpointsReturnVersions(string url)
         {
             // Arrange
-            _http = _factory.CreateClient();
             HttpResponseMessage response = await _http.GetAsync(url);
 
             // Act
