@@ -5,6 +5,6 @@ namespace Webmotors.Back9944.Business.Interfaces.Actions
 {
     public interface IUpdate<T> where T : Entity
     {
-        Task Update(T entity);
+        Task<bool> Update(T entity);
     }
 }

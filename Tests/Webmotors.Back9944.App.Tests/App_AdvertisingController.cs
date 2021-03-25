@@ -27,6 +27,7 @@ namespace Webmotors.Back9944.App.Tests
             // Arrange
             Advertising advertising = new Advertising 
             {
+                Id = 1,
                 Marca = null,
                 Modelo = null,
                 Observacao = null,
@@ -44,6 +45,7 @@ namespace Webmotors.Back9944.App.Tests
             // Assert
             Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
             Assert.True(errors.Count() > 0);
+            Assert.True(errors.Where(e => e.Contains("Id")).Count() > 0);
         }
 
         [Fact]
@@ -52,6 +54,7 @@ namespace Webmotors.Back9944.App.Tests
             // Arrange
             Advertising advertising = new Advertising
             {
+                Id = 0,
                 Marca = null,
                 Modelo = null,
                 Observacao = null,
@@ -69,6 +72,7 @@ namespace Webmotors.Back9944.App.Tests
             // Assert
             Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
             Assert.True(errors.Count() > 0);
+            Assert.True(errors.Where(e => e.Contains("Id")).Count() > 0);
         }
 
         private JsonSerializerOptions SerializeOptions()

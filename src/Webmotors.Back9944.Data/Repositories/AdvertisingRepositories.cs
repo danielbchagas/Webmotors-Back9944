@@ -16,20 +16,24 @@ namespace Webmotors.Back9944.Business.Repositories
             _context = context;
         }
 
-        public async Task Create(Advertising entity)
+        public async Task<bool> Create(Advertising entity)
         {
-            if (entity == null) return;
+            if (entity == null) return false;
 
             await _context.Advertisings.AddAsync(entity);
             await _context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task Delete(Advertising entity)
+        public async Task<bool> Delete(Advertising entity)
         {
-            if (entity == null) return;
+            if (entity == null) return false;
 
             _context.Advertisings.Remove(entity);
             await _context.SaveChangesAsync();
+
+            return true;
         }
 
         public void Dispose()
@@ -41,12 +45,14 @@ namespace Webmotors.Back9944.Business.Repositories
 
         public async Task<IEnumerable<Advertising>> Get() => await _context.Advertisings.ToListAsync();
 
-        public async Task Update(Advertising entity)
+        public async Task<bool> Update(Advertising entity)
         {
-            if (entity == null) return;
+            if (entity == null) return false;
 
             _context.Entry<Advertising>(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

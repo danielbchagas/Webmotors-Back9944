@@ -5,6 +5,6 @@ namespace Webmotors.Back9944.Business.Interfaces.Actions
 {
     public interface IDelete<T> where T : Entity 
     {
-        Task Delete(T entity);
+        Task<bool> Delete(T entity);
     } 
 }
