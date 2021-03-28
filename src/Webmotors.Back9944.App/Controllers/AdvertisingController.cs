@@ -35,7 +35,7 @@ namespace Webmotors.Back9944.App.Controllers
         }
 
         [HttpGet]
-        [Route("GetById/{id:int}")]
+        [Route("Get/{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             try

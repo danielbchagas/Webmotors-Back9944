@@ -11,7 +11,7 @@ export const Get = async () => {
 }
 
 export const GetById = async (id) => {
-    return await http.get("GetById/" + parseInt(id));
+    return await http.get("Get/" + parseInt(id));
 }
 
 export const Create = async (data) => {
