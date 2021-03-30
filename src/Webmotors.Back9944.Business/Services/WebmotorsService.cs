@@ -25,9 +25,7 @@ namespace Webmotors.Back9944.Business.Services
 
             string content = await response.Content.ReadAsStringAsync();
 
-            JsonSerializerOptions options = SerializeOptions();
-            
-            return JsonSerializer.Deserialize<IEnumerable<Maker>>(content, options);
+            return JsonSerializer.Deserialize<IEnumerable<Maker>>(content, SerializeOptions());
         }
 
         public async Task<IEnumerable<Model>> GetModels(int makerId)
@@ -36,9 +34,7 @@ namespace Webmotors.Back9944.Business.Services
 
             string content = await response.Content.ReadAsStringAsync();
 
-            JsonSerializerOptions options = SerializeOptions();
-
-            return JsonSerializer.Deserialize<IEnumerable<Model>>(content, options);
+            return JsonSerializer.Deserialize<IEnumerable<Model>>(content, SerializeOptions());
         }
 
         public async Task<IEnumerable<Vehicle>> GetVehicles(int pageIndex)
@@ -47,9 +43,7 @@ namespace Webmotors.Back9944.Business.Services
 
             string content = await response.Content.ReadAsStringAsync();
 
-            JsonSerializerOptions options = SerializeOptions();
-
-            return JsonSerializer.Deserialize<IEnumerable<Vehicle>>(content, options);
+            return JsonSerializer.Deserialize<IEnumerable<Vehicle>>(content, SerializeOptions());
         }
 
         public async Task<IEnumerable<Version>> GetVersions(int modelId)
@@ -58,9 +52,7 @@ namespace Webmotors.Back9944.Business.Services
 
             string content = await response.Content.ReadAsStringAsync();
 
-            JsonSerializerOptions options = SerializeOptions();
-
-            return JsonSerializer.Deserialize<IEnumerable<Version>>(content, options);
+            return JsonSerializer.Deserialize<IEnumerable<Version>>(content, SerializeOptions());
         }
 
         private JsonSerializerOptions SerializeOptions()

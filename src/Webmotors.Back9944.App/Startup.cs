@@ -4,17 +4,25 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Webmotors.Back9944.Business.Models;
 using Webmotors.Back9944.App.Configurations;
 using Webmotors.Back9944.App.Middlewares;
+using Webmotors.Back9944.Business.Models;
 
 namespace Webmotors.Back9944.App
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment environment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            builder.AddUserSecrets<Startup>();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -23,10 +31,12 @@ namespace Webmotors.Back9944.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<WebServiceOptions>(options => Configuration.GetSection("WebmotorsWebService").Bind(options));
-
+            
             services.AddEntityFrameworkConfigurations(Configuration);
             services.AddDependencyInjectionConfiguration();
-            
+            services.AddKissLogConfiguration();
+
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -57,6 +67,8 @@ namespace Webmotors.Back9944.App
             app.UseRouting();
 
             app.UseMiddleware<CustomExceptionMiddleware>();
+
+            app.ConfigureKissLogConfiguration(Configuration);
 
             app.UseEndpoints(endpoints =>
             {

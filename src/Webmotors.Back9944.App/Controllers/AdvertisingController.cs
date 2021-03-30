@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
@@ -56,13 +55,9 @@ namespace Webmotors.Back9944.App.Controllers
         {
             try
             {
-                await _service.Create(advertising);
-                var errors = _service.GetErrors();
+                var result = await _service.Create(advertising);
 
-                if (errors.Count() > 0)
-                    return BadRequest(errors);
-
-                return Ok();
+                return result == true ? Ok() : BadRequest(_service.GetErrors());
             }
             catch (Exception)
             {
@@ -76,13 +71,9 @@ namespace Webmotors.Back9944.App.Controllers
         {
             try
             {
-                await _service.Update(advertising);
-                var errors = _service.GetErrors();
+                var result = await _service.Update(advertising);
 
-                if (errors.Count() > 0)
-                    return BadRequest(errors);
-
-                return Ok();
+                return result == true ? Ok() : BadRequest(_service.GetErrors());
             }
             catch (Exception)
             {
@@ -96,10 +87,11 @@ namespace Webmotors.Back9944.App.Controllers
         {
             try
             {
-                var result = await _service.Get(id);
-                await _service.Delete(result);
+                var advertising = await _service.Get(id);
 
-                return NoContent();
+                var result = await _service.Delete(advertising);
+
+                return result == true ? NoContent() : BadRequest(_service.GetErrors());
             }
             catch (Exception)
             {

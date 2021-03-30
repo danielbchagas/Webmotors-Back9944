@@ -21,9 +21,9 @@ namespace Webmotors.Back9944.Business.Repositories
             if (entity == null) return false;
 
             await _context.Advertisings.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            int rows = await _context.SaveChangesAsync();
 
-            return true;
+            return rows > 0;
         }
 
         public async Task<bool> Delete(Advertising entity)
@@ -31,14 +31,9 @@ namespace Webmotors.Back9944.Business.Repositories
             if (entity == null) return false;
 
             _context.Advertisings.Remove(entity);
-            await _context.SaveChangesAsync();
+            int rows = await _context.SaveChangesAsync();
 
-            return true;
-        }
-
-        public void Dispose()
-        {
-            _context?.Dispose();
+            return rows > 0;
         }
 
         public async Task<Advertising> Get(int id) => await _context.Advertisings.FindAsync(id);
@@ -50,9 +45,14 @@ namespace Webmotors.Back9944.Business.Repositories
             if (entity == null) return false;
 
             _context.Entry<Advertising>(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            int rows = await _context.SaveChangesAsync();
 
-            return true;
+            return rows > 0;
+        }
+
+        public void Dispose()
+        {
+            _context?.Dispose();
         }
     }
 }

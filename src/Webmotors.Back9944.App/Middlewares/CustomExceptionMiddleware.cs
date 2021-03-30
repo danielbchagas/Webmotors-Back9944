@@ -24,7 +24,7 @@ namespace Webmotors.Back9944.App.Middlewares
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Exceção gerada em: {DateTime.Now}", e.Message);
+                _logger.LogError(e.Message);
             }
         }
     }

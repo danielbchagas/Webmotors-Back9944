@@ -27,7 +27,7 @@ namespace Webmotors.Back9944.App.Tests
             // Arrange
             Advertising advertising = new Advertising 
             {
-                Id = 1,
+                Id = 0,
                 Marca = null,
                 Modelo = null,
                 Observacao = null,
