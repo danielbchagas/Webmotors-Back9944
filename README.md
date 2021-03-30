@@ -7,5 +7,9 @@
 - [xUnit](https://xunit.net/)
 
 #### Como executar o projeto:
-- navegue até o diretório: Webmotors-Back9944\Webmotors.Back9944.App
-- dotnet run (no terminal)
+- Navegue até o diretório: Webmotors-Back9944\Webmotors.Back9944.App
+- Execute o comando: dotnet run (no terminal)
+
+#### Observações
+Estou utilizando o [KissLog](https://kisslog.net/) na classe ExceptionMiddleware, mas as chaves não estão junto com o fonte.  
+Você pode criar uma conta em: https://kisslog.net/, e registrar as credenciais no arquivo appsettings.json.
