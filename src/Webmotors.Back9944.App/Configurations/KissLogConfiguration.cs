@@ -30,7 +30,7 @@ namespace Webmotors.Back9944.App.Configurations
             return services;
         }
 
-        public static IApplicationBuilder ConfigureKissLogConfiguration(this IApplicationBuilder app, IConfiguration configuration)
+        public static IApplicationBuilder UseKissLogConfiguration(this IApplicationBuilder app, IConfiguration configuration)
         {
             app.UseKissLogMiddleware(options =>
             {

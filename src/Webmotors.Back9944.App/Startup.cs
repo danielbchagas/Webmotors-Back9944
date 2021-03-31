@@ -35,7 +35,7 @@ namespace Webmotors.Back9944.App
             services.AddEntityFrameworkConfigurations(Configuration);
             services.AddDependencyInjectionConfiguration();
             services.AddKissLogConfiguration();
-
+            services.AddHealthCheckConfiguration(Configuration);
 
             services.AddControllersWithViews();
 
@@ -68,13 +68,15 @@ namespace Webmotors.Back9944.App
 
             app.UseMiddleware<CustomExceptionMiddleware>();
 
-            app.ConfigureKissLogConfiguration(Configuration);
+            app.UseKissLogConfiguration(Configuration);
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHealthChecks("/health");
             });
 
             app.UseSpa(spa =>

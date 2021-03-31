@@ -36,9 +36,17 @@ namespace Webmotors.Back9944.Business.Repositories
             return rows > 0;
         }
 
-        public async Task<Advertising> Get(int id) => await _context.Advertisings.FindAsync(id);
+        public async Task<Advertising> Get(int id)
+        {
+            if (id < 0) return new Advertising { };
 
-        public async Task<IEnumerable<Advertising>> Get() => await _context.Advertisings.ToListAsync();
+            return await _context.Advertisings.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Advertising>> Get() 
+        {
+            return await _context.Advertisings.ToListAsync();
+        }
 
         public async Task<bool> Update(Advertising entity)
         {

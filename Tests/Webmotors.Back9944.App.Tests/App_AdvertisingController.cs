@@ -75,6 +75,20 @@ namespace Webmotors.Back9944.App.Tests
             Assert.True(errors.Where(e => e.Contains("Id")).Count() > 0);
         }
 
+        [Theory]
+        [InlineData("Advertising/Delete/-1")]
+        [InlineData("Advertising/Delete/-200")]
+        public async Task Delete_EndpointsDeleteAdvertisingErrors(string url)
+        {
+            // Arrange
+
+            // Act
+            HttpResponseMessage response = await _http.DeleteAsync(url);
+            
+            // Assert
+            Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
+        }
+
         private JsonSerializerOptions SerializeOptions()
         {
             JsonSerializerOptions options = new JsonSerializerOptions();

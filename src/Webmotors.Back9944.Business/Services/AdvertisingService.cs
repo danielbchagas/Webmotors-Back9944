@@ -73,6 +73,14 @@ namespace Webmotors.Back9944.Business.Services
 
         public async Task<bool> Delete(Advertising advertising)
         {
+            ValidationResult validation = _validation.Validate(advertising);
+
+            if (!validation.IsValid)
+            {
+                _errors = validation?.Errors.Select(e => e.ErrorMessage);
+                return false;
+            }
+
             return await _repository.Delete(advertising);
         }
 
