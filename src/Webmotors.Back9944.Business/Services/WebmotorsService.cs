@@ -26,48 +26,28 @@ namespace Webmotors.Back9944.Business.Services
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Make);
 
-            if (!response.IsSuccessStatusCode) 
-                throw new HttpRequestException(message: response.ReasonPhrase, inner: null,  statusCode: response.StatusCode);
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<IEnumerable<WmMaker>>(content, SerializeOptions());
+            return await Response<WmMaker>(response);
         }
 
         public async Task<IEnumerable<WmModel>> GetModels(int makerId)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Model + makerId);
 
-            if (!response.IsSuccessStatusCode)
-                throw new HttpRequestException(message: response.ReasonPhrase, inner: null, statusCode: response.StatusCode);
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<IEnumerable<WmModel>>(content, SerializeOptions());
+            return await Response<WmModel>(response);
         }
 
         public async Task<IEnumerable<WmVehicle>> GetVehicles(int pageIndex)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Vehicle + pageIndex);
 
-            if (!response.IsSuccessStatusCode)
-                throw new HttpRequestException(message: response.ReasonPhrase, inner: null, statusCode: response.StatusCode);
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<IEnumerable<WmVehicle>>(content, SerializeOptions());
+            return await Response<WmVehicle>(response);
         }
 
         public async Task<IEnumerable<WmVersion>> GetVersions(int modelId)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Version + modelId);
 
-            if (!response.IsSuccessStatusCode)
-                throw new HttpRequestException(message: response.ReasonPhrase, inner: null, statusCode: response.StatusCode);
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<IEnumerable<WmVersion>>(content, SerializeOptions());
+            return await Response<WmVersion>(response);
         }
 
         private JsonSerializerOptions SerializeOptions()
@@ -76,6 +56,28 @@ namespace Webmotors.Back9944.Business.Services
             options.PropertyNameCaseInsensitive = true;
 
             return options;
+        }
+
+        private async Task<IEnumerable<T>> Response<T>(HttpResponseMessage response) where T : Entity
+        {
+            try
+            {
+                string content = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                    throw FormatedException(response);
+
+                return JsonSerializer.Deserialize<IEnumerable<T>>(content, SerializeOptions());
+            }
+            catch (HttpRequestException e)
+            {
+                throw FormatedException(response, e);
+            }
+        }
+
+        private HttpRequestException FormatedException(HttpResponseMessage response, HttpRequestException e = null)
+        {
+            return new HttpRequestException(message: response.ReasonPhrase, inner: e, statusCode: response.StatusCode);
         }
     }
 }
