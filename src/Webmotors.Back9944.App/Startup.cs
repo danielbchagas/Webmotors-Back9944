@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Webmotors.Back9944.App.Configurations;
 using Webmotors.Back9944.App.Middlewares;
 using Webmotors.Back9944.Business.Models;
-using Webmotors.Back9944.Business.Models.Options;
 
 namespace Webmotors.Back9944.App
 {
