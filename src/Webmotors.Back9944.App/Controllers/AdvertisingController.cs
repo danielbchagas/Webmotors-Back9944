@@ -43,6 +43,10 @@ namespace Webmotors.Back9944.App.Controllers
 
                 return Ok(result);
             }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
             catch (Exception)
             {
                 return StatusCode(500);
@@ -55,9 +59,13 @@ namespace Webmotors.Back9944.App.Controllers
         {
             try
             {
-                var result = await _service.Create(advertising);
+                await _service.Create(advertising);
 
-                return result == true ? Ok() : BadRequest(_service.GetErrors());
+                return Ok();
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
             }
             catch (Exception)
             {
@@ -71,9 +79,13 @@ namespace Webmotors.Back9944.App.Controllers
         {
             try
             {
-                var result = await _service.Update(advertising);
+                await _service.Update(advertising);
 
-                return result == true ? Ok() : BadRequest(_service.GetErrors());
+                return Ok();
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
             }
             catch (Exception)
             {
@@ -89,9 +101,13 @@ namespace Webmotors.Back9944.App.Controllers
             {
                 var advertising = await _service.Get(id);
 
-                var result = await _service.Delete(advertising);
+                await _service.Delete(advertising);
 
-                return result == true ? NoContent() : BadRequest(_service.GetErrors());
+                return NoContent();
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
             }
             catch (Exception)
             {

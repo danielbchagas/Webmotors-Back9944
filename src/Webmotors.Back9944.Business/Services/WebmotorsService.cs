@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Webmotors.Back9944.Business.Configurations.Options;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
-using Webmotors.Back9944.Business.Models.Options;
 
 namespace Webmotors.Back9944.Business.Services
 {
     public class WebmotorsService : IWebmotorsService
     {
         private readonly HttpClient _http;
-        private readonly WebmotorsWebServiceOptions _options;
+        private readonly WebServiceOptions _options;
         
-        public WebmotorsService(HttpClient http, IOptions<WebmotorsWebServiceOptions> options)
+        public WebmotorsService(HttpClient http, IOptions<WebServiceOptions> options)
         {
             _http = http;
             _options = options.Value;

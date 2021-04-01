@@ -15,14 +15,61 @@ namespace Webmotors.Back9944.Business.Services
         private readonly AdvertisingValidation _validation;
         private readonly IAdvertisingRepository _repository;
         private readonly IWebmotorsService _service;
-        public IEnumerable<string> _errors;
         
         public AdvertisingService(IAdvertisingRepository repository, IWebmotorsService service)
         {
             _validation = new AdvertisingValidation();
             _repository = repository;
             _service = service;
-            _errors = new List<string>();
+        }
+
+        public async Task<Advertising> Get(int id) => await _repository.Get(id);
+
+        public async Task<IEnumerable<Advertising>> Get() => await _repository.Get();
+
+        public async Task<bool> Create(Advertising advertising)
+        {
+            ValidationResult validation = _validation.Validate(advertising);
+
+            if (!validation.IsValid)
+            {
+                throw FormattedException(validation);
+            }
+
+            Advertising newAdvertising = await FromIdToName(advertising);
+
+            return await _repository.Create(newAdvertising);
+        }
+
+        public async Task<bool> Update(Advertising advertising)
+        {
+            ValidationResult validation = _validation.Validate(advertising);
+
+            if (!validation.IsValid)
+            {
+                throw FormattedException(validation);
+            }
+
+            Advertising newAdvertising = await FromIdToName(advertising);
+
+            return await _repository.Update(newAdvertising);
+        }
+
+        public async Task<bool> Delete(Advertising advertising)
+        {
+            ValidationResult validation = _validation.Validate(advertising);
+
+            if (!validation.IsValid)
+            {
+                throw FormattedException(validation);
+            }
+
+            return await _repository.Delete(advertising);
+        }
+
+        public void Dispose()
+        {
+            _repository.Dispose();
         }
 
         private async Task<Advertising> FromIdToName(Advertising advertising)
@@ -37,61 +84,9 @@ namespace Webmotors.Back9944.Business.Services
             return advertising;
         }
 
-        public async Task<Advertising> Get(int id) => await _repository.Get(id);
-
-        public async Task<IEnumerable<Advertising>> Get() => await _repository.Get();
-
-        public async Task<bool> Create(Advertising advertising)
+        private ArgumentException FormattedException(ValidationResult validation)
         {
-            ValidationResult validation = _validation.Validate(advertising);
-            
-            if (!validation.IsValid)
-            {
-                _errors = validation?.Errors.Select(e => e.ErrorMessage);
-                return false;
-            }
-                
-            Advertising newAdvertising = await FromIdToName(advertising);
-
-            return await _repository.Create(newAdvertising);
-        }
-
-        public async Task<bool> Update(Advertising advertising)
-        {
-            ValidationResult validation = _validation.Validate(advertising);
-
-            if (!validation.IsValid)
-            {
-                _errors = validation?.Errors.Select(e => e.ErrorMessage);
-                return false;
-            }
-
-            Advertising newAdvertising = await FromIdToName(advertising);
-
-            return await _repository.Update(newAdvertising);
-        }
-
-        public async Task<bool> Delete(Advertising advertising)
-        {
-            ValidationResult validation = _validation.Validate(advertising);
-
-            if (!validation.IsValid)
-            {
-                _errors = validation?.Errors.Select(e => e.ErrorMessage);
-                return false;
-            }
-
-            return await _repository.Delete(advertising);
-        }
-
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
-
-        public IEnumerable<string> GetErrors()
-        {
-            return _errors;
+            return new ArgumentException(string.Join(" - ", validation?.Errors.Select(e => e.ErrorMessage)));
         }
     }
 }

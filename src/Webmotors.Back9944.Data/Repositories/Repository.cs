@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Repositories;
 using Webmotors.Back9944.Business.Models;
 using Webmotors.Back9944.Data.Contexts;
+using System;
 
 namespace Webmotors.Back9944.Data.Repositories
 {
@@ -18,7 +19,7 @@ namespace Webmotors.Back9944.Data.Repositories
 
         public async Task<bool> Create(TEntity entity)
         {
-            if (entity == null) return false;
+            if (entity == null) throw new ArgumentException();
 
             await _context.Set<TEntity>().AddAsync(entity);
             int rows = await _context.SaveChangesAsync();
@@ -28,7 +29,7 @@ namespace Webmotors.Back9944.Data.Repositories
 
         public async Task<bool> Delete(TEntity entity)
         {
-            if (entity == null) return false;
+            if (entity == null) throw new ArgumentException();
 
             _context.Set<TEntity>().Remove(entity);
             int rows = await _context.SaveChangesAsync();
@@ -38,7 +39,7 @@ namespace Webmotors.Back9944.Data.Repositories
 
         public async Task<bool> Update(TEntity entity)
         {
-            if (entity == null) return false;
+            if (entity == null) throw new ArgumentException();
 
             _context.Entry<TEntity>(entity).State = EntityState.Modified;
             int rows = await _context.SaveChangesAsync();
@@ -48,7 +49,7 @@ namespace Webmotors.Back9944.Data.Repositories
 
         public virtual async Task<TEntity> Get(int id)
         {
-            if (id < 0) return new TEntity();
+            if (id < 0) throw new ArgumentException();
 
             return await _context.Set<TEntity>().FindAsync(id);
         }
