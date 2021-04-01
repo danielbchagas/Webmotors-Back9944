@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -27,6 +26,9 @@ namespace Webmotors.Back9944.Business.Services
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Make);
 
+            if (!response.IsSuccessStatusCode) 
+                throw new HttpRequestException(message: response.ReasonPhrase, inner: null,  statusCode: response.StatusCode);
+
             string content = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<IEnumerable<WmMaker>>(content, SerializeOptions());
@@ -36,8 +38,8 @@ namespace Webmotors.Back9944.Business.Services
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Model + makerId);
 
-            if (response.StatusCode != HttpStatusCode.OK)
-                return new List<WmModel>();
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException(message: response.ReasonPhrase, inner: null, statusCode: response.StatusCode);
 
             string content = await response.Content.ReadAsStringAsync();
 
@@ -48,8 +50,8 @@ namespace Webmotors.Back9944.Business.Services
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Vehicle + pageIndex);
 
-            if (response.StatusCode != HttpStatusCode.OK)
-                return new List<WmVehicle>();
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException(message: response.ReasonPhrase, inner: null, statusCode: response.StatusCode);
 
             string content = await response.Content.ReadAsStringAsync();
 
@@ -60,8 +62,8 @@ namespace Webmotors.Back9944.Business.Services
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Version + modelId);
 
-            if (response.StatusCode != HttpStatusCode.OK)
-                return new List<WmVersion>();
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException(message: response.ReasonPhrase, inner: null, statusCode: response.StatusCode);
 
             string content = await response.Content.ReadAsStringAsync();
 
