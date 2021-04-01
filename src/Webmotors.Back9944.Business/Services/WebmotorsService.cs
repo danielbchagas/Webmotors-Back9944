@@ -6,15 +6,16 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
+using Webmotors.Back9944.Business.Models.Options;
 
 namespace Webmotors.Back9944.Business.Services
 {
     public class WebmotorsService : IWebmotorsService
     {
         private readonly HttpClient _http;
-        private readonly WebServiceOptions _options;
+        private readonly WebmotorsWebServiceOptions _options;
         
-        public WebmotorsService(HttpClient http, IOptions<WebServiceOptions> options)
+        public WebmotorsService(HttpClient http, IOptions<WebmotorsWebServiceOptions> options)
         {
             _http = http;
             _options = options.Value;
@@ -65,17 +66,17 @@ namespace Webmotors.Back9944.Business.Services
                 string content = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
-                    throw FormatedException(response);
+                    throw FormattedException(response);
 
                 return JsonSerializer.Deserialize<IEnumerable<T>>(content, SerializeOptions());
             }
             catch (HttpRequestException e)
             {
-                throw FormatedException(response, e);
+                throw FormattedException(response, e);
             }
         }
 
-        private HttpRequestException FormatedException(HttpResponseMessage response, HttpRequestException e = null)
+        private HttpRequestException FormattedException(HttpResponseMessage response, HttpRequestException e = null)
         {
             return new HttpRequestException(message: response.ReasonPhrase, inner: e, statusCode: response.StatusCode);
         }

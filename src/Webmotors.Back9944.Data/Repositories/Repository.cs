@@ -7,7 +7,7 @@ using Webmotors.Back9944.Data.Contexts;
 
 namespace Webmotors.Back9944.Data.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : Entity, new()
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
         private readonly ApplicationContext _context;
 
@@ -16,46 +16,46 @@ namespace Webmotors.Back9944.Data.Repositories
             _context = context;
         }
 
-        public async Task<bool> Create(T entity)
+        public async Task<bool> Create(TEntity entity)
         {
             if (entity == null) return false;
 
-            await _context.Set<T>().AddAsync(entity);
+            await _context.Set<TEntity>().AddAsync(entity);
             int rows = await _context.SaveChangesAsync();
 
             return rows > 0;
         }
 
-        public async Task<bool> Delete(T entity)
+        public async Task<bool> Delete(TEntity entity)
         {
             if (entity == null) return false;
 
-            _context.Set<T>().Remove(entity);
+            _context.Set<TEntity>().Remove(entity);
             int rows = await _context.SaveChangesAsync();
 
             return rows > 0;
         }
 
-        public async Task<bool> Update(T entity)
+        public async Task<bool> Update(TEntity entity)
         {
             if (entity == null) return false;
 
-            _context.Entry<T>(entity).State = EntityState.Modified;
+            _context.Entry<TEntity>(entity).State = EntityState.Modified;
             int rows = await _context.SaveChangesAsync();
 
             return rows > 0;
         }
 
-        public virtual async Task<T> Get(int id)
+        public virtual async Task<TEntity> Get(int id)
         {
-            if (id < 0) return new T();
+            if (id < 0) return new TEntity();
 
-            return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public virtual async Task<IEnumerable<T>> Get()
+        public virtual async Task<IEnumerable<TEntity>> Get()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
         public void Dispose()

@@ -1,8 +1,7 @@
-﻿namespace Webmotors.Back9944.Business.Models
+﻿namespace Webmotors.Back9944.Business.Models.Options
 {
-    public class WebServiceOptions
+    public class WebmotorsWebServiceOptions : WebServiceOptions
     {
-        public string Base { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public string Version { get; set; }
