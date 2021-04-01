@@ -5,7 +5,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Models;
 using Xunit;
-using Version = Webmotors.Back9944.Business.Models.Version;
 
 namespace Webmotors.Back9944.App.Tests
 {
@@ -29,7 +28,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<Maker> result = JsonSerializer.Deserialize<IEnumerable<Maker>>(content, SerializeOptions());
+            IEnumerable<WmMaker> result = JsonSerializer.Deserialize<IEnumerable<WmMaker>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -47,7 +46,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<Model> result = JsonSerializer.Deserialize<IEnumerable<Model>>(content, SerializeOptions());
+            IEnumerable<WmModel> result = JsonSerializer.Deserialize<IEnumerable<WmModel>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -65,7 +64,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<Vehicle> result = JsonSerializer.Deserialize<IEnumerable<Vehicle>>(content, SerializeOptions());
+            IEnumerable<WmVehicle> result = JsonSerializer.Deserialize<IEnumerable<WmVehicle>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -82,7 +81,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<Version> result = JsonSerializer.Deserialize<IEnumerable<Version>>(content, SerializeOptions());
+            IEnumerable<WmVersion> result = JsonSerializer.Deserialize<IEnumerable<WmVersion>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);

@@ -6,9 +6,9 @@ namespace Webmotors.Back9944.Business.Interfaces.Services
 {
     public interface IWebmotorsService
     {
-        Task<IEnumerable<Maker>> GetMakers();
-        Task<IEnumerable<Model>> GetModels(int makerId);
-        Task<IEnumerable<Version>> GetVersions(int modelId);
-        Task<IEnumerable<Vehicle>> GetVehicles(int pageIndex);
+        Task<IEnumerable<WmMaker>> GetMakers();
+        Task<IEnumerable<WmModel>> GetModels(int makerId);
+        Task<IEnumerable<WmVersion>> GetVersions(int modelId);
+        Task<IEnumerable<WmVehicle>> GetVehicles(int pageIndex);
     }
 }
