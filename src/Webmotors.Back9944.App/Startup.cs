@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -36,6 +37,8 @@ namespace Webmotors.Back9944.App
             services.AddDependencyInjectionConfiguration();
             services.AddKissLogConfiguration();
             services.AddHealthCheckConfiguration(Configuration);
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllersWithViews();
 

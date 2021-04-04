@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Webmotors.Back9944.App.ViewModels;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
+using AutoMapper;
 
 namespace Webmotors.Back9944.App.Controllers
 {
@@ -15,11 +16,13 @@ namespace Webmotors.Back9944.App.Controllers
     {
         private readonly IAdvertisingService _service;
         private readonly IWebmotorsService _webmotorsService;
+        private readonly IMapper _mapper;
 
-        public AdvertisingController(IAdvertisingService service, IWebmotorsService webmotorsService)
+        public AdvertisingController(IAdvertisingService service, IWebmotorsService webmotorsService, IMapper mapper)
         {
             _service = service;
             _webmotorsService = webmotorsService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -76,11 +79,11 @@ namespace Webmotors.Back9944.App.Controllers
 
         [HttpPut]
         [Route("Update")]
-        public async Task<IActionResult> Put(Advertising advertising)
+        public async Task<IActionResult> Put(AdvertisingViewModel advertising)
         {
             try
             {
-                await _service.Update(advertising);
+                await _service.Update(await FromIdToName(advertising));
 
                 return Ok();
             }
