@@ -9,7 +9,7 @@ namespace Webmotors.Back9944.Business.Validations
         public AdvertisingValidation()
         {
             RuleFor(a => a.Id)
-                .ExclusiveBetween(0, int.MaxValue).WithMessage("A propriedade {PropertyName} é inválida!")
+                .ExclusiveBetween(-1, int.MaxValue).WithMessage("A propriedade {PropertyName} é inválida!")
                 .NotNull().WithMessage("A propriedade {PropertyName} não pode ser nula!");
 
             RuleFor(a => a.Marca)
@@ -28,11 +28,11 @@ namespace Webmotors.Back9944.Business.Validations
                 .NotNull().WithMessage("O campo {PropertyName} não pode ser nulo!");
 
             RuleFor(a => a.Ano)
-                .ExclusiveBetween(1950, DateTime.Now.Year).WithMessage("A propriedade {PropertyName} é inválida!")
+                .ExclusiveBetween(1950, DateTime.Now.Year + 1).WithMessage("A propriedade {PropertyName} é inválida!")
                 .NotNull().WithMessage("O campo {PropertyName} não pode ser nulo!");
 
             RuleFor(a => a.Quilometragem)
-                .ExclusiveBetween(0, int.MaxValue).WithMessage("A propriedade {PropertyName} é inválida!")
+                .ExclusiveBetween(-1, int.MaxValue).WithMessage("A propriedade {PropertyName} é inválida!")
                 .NotNull().WithMessage("O campo {PropertyName} não pode ser nulo!");
 
             RuleFor(a => a.Observacao)

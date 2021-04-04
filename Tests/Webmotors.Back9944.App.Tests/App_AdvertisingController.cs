@@ -78,7 +78,21 @@ namespace Webmotors.Back9944.App.Tests
             HttpResponseMessage response = await _http.DeleteAsync(url);
             
             // Assert
-            Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
+            Assert.True((int)response.StatusCode == StatusCodes.Status500InternalServerError);
+        }
+
+        [Theory]
+        [InlineData("Advertising/Get/-1")]
+        [InlineData("Advertising/Get/-200")]
+        public async Task Get_EndpointsGetAdvertisingErrors(string url)
+        {
+            // Arrange
+
+            // Act
+            HttpResponseMessage response = await _http.GetAsync(url);
+
+            // Assert
+            Assert.True((int)response.StatusCode == StatusCodes.Status500InternalServerError);
         }
 
         private JsonSerializerOptions SerializeOptions()

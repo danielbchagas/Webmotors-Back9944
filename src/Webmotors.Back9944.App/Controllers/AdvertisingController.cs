@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Webmotors.Back9944.App.ViewModels;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
 
@@ -11,10 +14,12 @@ namespace Webmotors.Back9944.App.Controllers
     public class AdvertisingController : ControllerBase
     {
         private readonly IAdvertisingService _service;
+        private readonly IWebmotorsService _webmotorsService;
 
-        public AdvertisingController(IAdvertisingService service)
+        public AdvertisingController(IAdvertisingService service, IWebmotorsService webmotorsService)
         {
             _service = service;
+            _webmotorsService = webmotorsService;
         }
 
         [HttpGet]
@@ -27,9 +32,9 @@ namespace Webmotors.Back9944.App.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500);
+                return Problem(e.Message);
             }
         }
 
@@ -43,33 +48,29 @@ namespace Webmotors.Back9944.App.Controllers
 
                 return Ok(result);
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
-                return BadRequest(e.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
+                return Problem(e.Message);
             }
         }
 
         [HttpPost]
         [Route("Create")]
-        public async Task<IActionResult> Post(Advertising advertising)
+        public async Task<IActionResult> Post(AdvertisingViewModel advertising)
         {
             try
             {
-                await _service.Create(advertising);
+                await _service.Create(await FromIdToName(advertising));
 
-                return Ok();
+                return Created(nameof(Get), advertising.Id);
             }
-            catch (ArgumentException e)
+            catch (ValidationException e)
             {
                 return BadRequest(e.Message);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500);
+                return Problem(e.Message);
             }
         }
 
@@ -83,13 +84,13 @@ namespace Webmotors.Back9944.App.Controllers
 
                 return Ok();
             }
-            catch (ArgumentException e)
+            catch (ValidationException e)
             {
                 return BadRequest(e.Message);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500);
+                return Problem(e.Message);
             }
         }
 
@@ -105,14 +106,52 @@ namespace Webmotors.Back9944.App.Controllers
 
                 return NoContent();
             }
-            catch (ArgumentException e)
+            catch (ValidationException e)
             {
                 return BadRequest(e.Message);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return StatusCode(500);
+                return Problem(e.Message);
             }
         }
+
+        #region
+        private async Task<Advertising> FromIdToName(AdvertisingViewModel advertisingVm)
+        {
+            var advertising = new Advertising();
+
+            advertising.Id = advertisingVm.Id;
+            advertising.Marca = await FromMakers(advertisingVm.Marca);
+            advertising.Modelo = await FromModels(advertisingVm.Marca, advertisingVm.Modelo);
+            advertising.Versao = await FromVersions(advertisingVm.Modelo, advertisingVm.Versao);
+            advertising.Observacao = advertisingVm.Observacao;
+            advertising.Ano = advertisingVm.Ano;
+            advertising.Quilometragem = advertisingVm.Quilometragem;
+
+            return advertising;
+        }
+
+        private async Task<string> FromMakers(int id)
+        {
+            var result = (await _webmotorsService.GetMakers()).FirstOrDefault(_ => _.Id == id);
+
+            return result.Name;
+        }
+
+        private async Task<string> FromModels(int makerId, int modelId)
+        {
+            var result = (await _webmotorsService.GetModels(makerId)).FirstOrDefault(_ => _.Id == modelId);
+
+            return result.Name;
+        }
+
+        private async Task<string> FromVersions(int modelId, int versionId)
+        {
+            var result = (await _webmotorsService.GetVersions(modelId)).FirstOrDefault(_ => _.Id == versionId);
+
+            return result.Name;
+        }
+        #endregion
     }
 }

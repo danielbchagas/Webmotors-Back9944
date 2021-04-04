@@ -101,7 +101,7 @@ const Form = (props) => {
         if(data.id === 0) {
             Create(data)
             .then(response => {
-                if(response.status === 200) {
+                if(response.status === 201) {
                     Swal.fire({
                         title: 'Pronto!',
                         text: 'Anúncio salvo com sucesso!',
