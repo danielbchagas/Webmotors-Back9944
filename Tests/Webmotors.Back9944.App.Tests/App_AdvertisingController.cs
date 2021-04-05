@@ -20,10 +20,10 @@ namespace Webmotors.Back9944.App.Tests
         }
 
         [Fact]
-        public async Task Post_EndpointsCreateAdvertisingErrors()
+        public async Task Post_EndpointReturnBadRequest()
         {
             // Arrange
-            Advertising advertising = new Advertising 
+            var advertising = new Advertising 
             {
                 Id = 0,
                 Marca = null,
@@ -32,19 +32,19 @@ namespace Webmotors.Back9944.App.Tests
                 Versao = null
             };
 
-            string json = JsonSerializer.Serialize(advertising);
+            var json = JsonSerializer.Serialize(advertising);
 
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             // Act
-            HttpResponseMessage response = await _http.PostAsync("Advertising/Create", stringContent);
+            var response = await _http.PostAsync("Advertising/Create", stringContent);
             
             // Assert
             Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
         }
 
         [Fact]
-        public async Task Put_EndpointsUpdateAdvertisingErrors()
+        public async Task Put_EndpointReturnBadRequest()
         {
             // Arrange
             Advertising advertising = new Advertising
@@ -70,7 +70,7 @@ namespace Webmotors.Back9944.App.Tests
         [Theory]
         [InlineData("Advertising/Delete/-1")]
         [InlineData("Advertising/Delete/-200")]
-        public async Task Delete_EndpointsDeleteAdvertisingErrors(string url)
+        public async Task Delete_EndpointReturnInternalServerError(string url)
         {
             // Arrange
 
@@ -84,7 +84,7 @@ namespace Webmotors.Back9944.App.Tests
         [Theory]
         [InlineData("Advertising/Get/-1")]
         [InlineData("Advertising/Get/-200")]
-        public async Task Get_EndpointsGetAdvertisingErrors(string url)
+        public async Task Get_EndpointReturnInternalServerError(string url)
         {
             // Arrange
 
@@ -93,14 +93,6 @@ namespace Webmotors.Back9944.App.Tests
 
             // Assert
             Assert.True((int)response.StatusCode == StatusCodes.Status500InternalServerError);
-        }
-
-        private JsonSerializerOptions SerializeOptions()
-        {
-            JsonSerializerOptions options = new JsonSerializerOptions();
-            options.PropertyNameCaseInsensitive = true;
-
-            return options;
         }
     }
 }

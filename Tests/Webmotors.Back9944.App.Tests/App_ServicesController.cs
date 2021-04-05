@@ -21,7 +21,7 @@ namespace Webmotors.Back9944.App.Tests
 
         [Theory]
         [InlineData("Services/makers")]
-        public async Task Get_EndpointsReturnMakers(string url)
+        public async Task Get_EndpointReturnMakers(string url)
         {
             // Arrange
             HttpResponseMessage response = await _http.GetAsync(url);
@@ -39,7 +39,7 @@ namespace Webmotors.Back9944.App.Tests
         [InlineData("Services/Models/1")]
         [InlineData("Services/Models/2")]
         [InlineData("Services/Models/3")]
-        public async Task Get_EndpointsReturnModels(string url)
+        public async Task Get_EndpointReturnModels(string url)
         {
             // Arrange
             HttpResponseMessage response = await _http.GetAsync(url);
@@ -57,7 +57,7 @@ namespace Webmotors.Back9944.App.Tests
         [InlineData("Services/Vehicles/1")]
         [InlineData("Services/Vehicles/2")]
         [InlineData("Services/Vehicles/3")]
-        public async Task Get_EndpointsReturnVehicles(string url)
+        public async Task Get_EndpointReturnVehicles(string url)
         {
             // Arrange
             HttpResponseMessage response = await _http.GetAsync(url);
@@ -74,7 +74,7 @@ namespace Webmotors.Back9944.App.Tests
         [InlineData("Services/Versions/1")]
         [InlineData("Services/Versions/2")]
         [InlineData("Services/Versions/3")]
-        public async Task Get_EndpointsReturnVersions(string url)
+        public async Task Get_EndpointReturnVersions(string url)
         {
             // Arrange
             HttpResponseMessage response = await _http.GetAsync(url);
