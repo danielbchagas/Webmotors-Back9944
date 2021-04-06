@@ -15,18 +15,21 @@ namespace Webmotors.Back9944.App.Tests
             _validation = new AdvertisingValidation();
         }
 
-        [Fact]
-        public void Create_ThrowValidationException()
+        [Theory]
+        [InlineData(-1, null, null, null, null, 1949)]
+        [InlineData(-10, "", null, "", null, 1500)]
+        [InlineData(-90, null, "", null, null, 1900)]
+        public void Create_ThrowValidationException(int id, string marca, string modelo, string observacao, string versao, int date)
         {
             // Arrange
             var advertising = new Advertising
             {
-                Id = -1,
-                Marca = null,
-                Modelo = null,
-                Observacao = null,
-                Versao = null,
-                Ano = 1949
+                Id = id,
+                Marca = marca,
+                Modelo = modelo,
+                Observacao = observacao,
+                Versao = versao,
+                Ano = date
             };
 
             // Assert

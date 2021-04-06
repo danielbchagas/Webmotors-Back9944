@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Webmotors.Back9944.Business.Interfaces.Repositories;
 using Xunit;
@@ -20,16 +20,18 @@ namespace Webmotors.Back9944.App.Tests
             _repository = newScope.ServiceProvider.GetRequiredService<IAdvertisingRepository>();
         }
 
-        [Fact]
-        public async Task Get()
+        [Theory]
+        [InlineData(-1)]
+        public async Task Get(int id)
         {
             // Arrange
 
-            // Act
-            var result = await _repository.Get();
-
             // Assert
-            Assert.True(result.Count() > 0);
+            var exception = await Assert.ThrowsAsync<ArgumentException>(async () => 
+            {
+                // Act
+                var result = await _repository.Get(id);
+            });
         }
     }
 }

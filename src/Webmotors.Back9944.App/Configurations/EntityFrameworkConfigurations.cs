@@ -11,8 +11,6 @@ namespace Webmotors.Back9944.App.Configurations
     {
         public static IServiceCollection AddEntityFrameworkConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("teste_webmotors");
-
             services.AddDbContext<ApplicationContext>(optionsAction =>
             {
                 optionsAction.UseSqlServer(configuration.GetConnectionString("teste_webmotors"), sqlServerOptionsAction: options => {

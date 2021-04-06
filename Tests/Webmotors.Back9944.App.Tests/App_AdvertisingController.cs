@@ -19,17 +19,21 @@ namespace Webmotors.Back9944.App.Tests
             _http = _factory.CreateClient();
         }
 
-        [Fact]
-        public async Task Post_EndpointReturnBadRequest()
+        [Theory]
+        [InlineData(-1, null, null, null, null, 1949)]
+        [InlineData(-10, "", null, "", null, 1500)]
+        [InlineData(-90, null, "", null, null, 1900)]
+        public async Task Post_EndpointReturnBadRequest(int id, string marca, string modelo, string observacao, string versao, int date)
         {
             // Arrange
-            var advertising = new Advertising 
+            var advertising = new Advertising
             {
-                Id = 0,
-                Marca = null,
-                Modelo = null,
-                Observacao = null,
-                Versao = null
+                Id = id,
+                Marca = marca,
+                Modelo = modelo,
+                Observacao = observacao,
+                Versao = versao,
+                Ano = date
             };
 
             var json = JsonSerializer.Serialize(advertising);
@@ -43,17 +47,21 @@ namespace Webmotors.Back9944.App.Tests
             Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
         }
 
-        [Fact]
-        public async Task Put_EndpointReturnBadRequest()
+        [Theory]
+        [InlineData(-1, null, null, null, null, 1949)]
+        [InlineData(-10, "", null, "", null, 1500)]
+        [InlineData(-90, null, "", null, null, 1900)]
+        public async Task Put_EndpointReturnBadRequest(int id, string marca, string modelo, string observacao, string versao, int date)
         {
             // Arrange
-            Advertising advertising = new Advertising
+            var advertising = new Advertising
             {
-                Id = 0,
-                Marca = null,
-                Modelo = null,
-                Observacao = null,
-                Versao = null
+                Id = id,
+                Marca = marca,
+                Modelo = modelo,
+                Observacao = observacao,
+                Versao = versao,
+                Ano = date
             };
 
             string json = JsonSerializer.Serialize(advertising);
