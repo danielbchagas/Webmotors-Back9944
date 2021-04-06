@@ -33,5 +33,8 @@ namespace Webmotors.Back9944.Business.Repositories
         {
             _repository.Dispose();
         }
+
+        public Task<IEnumerable<Advertising>> Get(int pageIndex = 1, int pageSize = 10)
+            => _repository.Get(pageIndex, pageSize);
     }
 }

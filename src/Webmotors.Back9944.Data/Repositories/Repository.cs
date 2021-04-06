@@ -5,6 +5,7 @@ using Webmotors.Back9944.Business.Interfaces.Repositories;
 using Webmotors.Back9944.Business.Models;
 using Webmotors.Back9944.Data.Contexts;
 using System;
+using System.Linq;
 
 namespace Webmotors.Back9944.Data.Repositories
 {
@@ -62,6 +63,11 @@ namespace Webmotors.Back9944.Data.Repositories
         public void Dispose()
         {
             _context?.Dispose();
+        }
+
+        public async Task<IEnumerable<TEntity>> Get(int pageIndex = 1, int pageSize = 10)
+        {
+            return await _context.Set<TEntity>().Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
         }
     }
 }

@@ -12,5 +12,6 @@ namespace Webmotors.Back9944.Business.Interfaces.Repositories
         Task<bool> Update(T entity);
         Task<T> Get(int id);
         Task<IEnumerable<T>> Get();
+        Task<IEnumerable<T>> Get(int pageIndex = 1, int pageSize = 10);
     }
 }
