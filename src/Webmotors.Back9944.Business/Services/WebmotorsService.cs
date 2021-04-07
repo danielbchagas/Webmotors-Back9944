@@ -23,32 +23,32 @@ namespace Webmotors.Back9944.Business.Services
             _http.BaseAddress = new Uri(_options.Base);
         }
 
-        public async Task<IEnumerable<WmMaker>> GetMakers()
+        public async Task<IEnumerable<MakerDto>> GetMakers()
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Make);
 
-            return await Response<WmMaker>(response);
+            return await Response<MakerDto>(response);
         }
 
-        public async Task<IEnumerable<WmModel>> GetModels(int makerId)
+        public async Task<IEnumerable<ModelDto>> GetModels(int makerId)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Model + makerId);
 
-            return await Response<WmModel>(response);
+            return await Response<ModelDto>(response);
         }
 
-        public async Task<IEnumerable<WmVehicle>> GetVehicles(int pageIndex)
+        public async Task<IEnumerable<VehicleDto>> GetVehicles(int pageIndex)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Vehicle + pageIndex);
 
-            return await Response<WmVehicle>(response);
+            return await Response<VehicleDto>(response);
         }
 
-        public async Task<IEnumerable<WmVersion>> GetVersions(int modelId)
+        public async Task<IEnumerable<VersionDto>> GetVersions(int modelId)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Version + modelId);
 
-            return await Response<WmVersion>(response);
+            return await Response<VersionDto>(response);
         }
 
         private JsonSerializerOptions SerializeOptions()
@@ -59,7 +59,7 @@ namespace Webmotors.Back9944.Business.Services
             return options;
         }
 
-        private async Task<IEnumerable<T>> Response<T>(HttpResponseMessage response) where T : Entity
+        private async Task<IEnumerable<T>> Response<T>(HttpResponseMessage response) where T : class
         {
             try
             {

@@ -1,7 +1,8 @@
 namespace Webmotors.Back9944.Business.Models
 {
-    public class WmVehicle : Entity
+    public class VehicleDto
     {
+        public int Id { get; set; }
         public string Make {get;set;}
         public string Model {get;set;}
         public string Version {get;set;}

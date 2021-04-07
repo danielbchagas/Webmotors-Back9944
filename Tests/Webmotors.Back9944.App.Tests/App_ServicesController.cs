@@ -29,7 +29,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<WmMaker> result = JsonSerializer.Deserialize<IEnumerable<WmMaker>>(content, SerializeOptions());
+            IEnumerable<MakerDto> result = JsonSerializer.Deserialize<IEnumerable<MakerDto>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -47,7 +47,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<WmModel> result = JsonSerializer.Deserialize<IEnumerable<WmModel>>(content, SerializeOptions());
+            IEnumerable<ModelDto> result = JsonSerializer.Deserialize<IEnumerable<ModelDto>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -65,7 +65,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<WmVehicle> result = JsonSerializer.Deserialize<IEnumerable<WmVehicle>>(content, SerializeOptions());
+            IEnumerable<VehicleDto> result = JsonSerializer.Deserialize<IEnumerable<VehicleDto>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -82,7 +82,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<WmVersion> result = JsonSerializer.Deserialize<IEnumerable<WmVersion>>(content, SerializeOptions());
+            IEnumerable<VersionDto> result = JsonSerializer.Deserialize<IEnumerable<VersionDto>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
