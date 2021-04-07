@@ -3,17 +3,18 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Webmotors.Back9944.App.Tests.Factories;
 using Webmotors.Back9944.Business.Models;
 using Xunit;
 
 namespace Webmotors.Back9944.App.Tests
 {
-    public class App_ServicesController : IClassFixture<WebApplicationFactory<Startup>>
+    public class App_ServicesController : IClassFixture<AppFactory<Startup>>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly AppFactory<Startup> _factory;
         private HttpClient _http;
 
-        public App_ServicesController(WebApplicationFactory<Startup> factory)
+        public App_ServicesController(AppFactory<Startup> factory)
         {
             _factory = factory;
             _http = _factory.CreateClient();

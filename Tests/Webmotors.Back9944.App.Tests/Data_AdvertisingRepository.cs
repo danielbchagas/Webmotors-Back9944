@@ -1,23 +1,22 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
+using Webmotors.Back9944.App.Tests.Factories;
 using Webmotors.Back9944.Business.Interfaces.Repositories;
 using Xunit;
 
 namespace Webmotors.Back9944.App.Tests
 {
-    public class Data_AdvertisingRepository : IClassFixture<WebApplicationFactory<Startup>>
+    public class Data_AdvertisingRepository : IClassFixture<DataFactory<Startup>>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly DataFactory<Startup> _factory;
         private readonly IAdvertisingRepository _repository;
 
-        public Data_AdvertisingRepository(WebApplicationFactory<Startup> factory)
+        public Data_AdvertisingRepository(DataFactory<Startup> factory)
         {
             _factory = factory;
-
-            var newScope = _factory.Services.CreateScope();
-            
-            _repository = newScope.ServiceProvider.GetRequiredService<IAdvertisingRepository>();
+            var scope = _factory.Services.CreateScope();
+            _repository = scope.ServiceProvider.GetRequiredService<IAdvertisingRepository>();
         }
 
         [Theory]
