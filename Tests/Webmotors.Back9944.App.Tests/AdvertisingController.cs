@@ -9,12 +9,12 @@ using Xunit;
 
 namespace Webmotors.Back9944.App.Tests
 {
-    public class App_AdvertisingController : IClassFixture<AppFactory<Startup>>
+    public class AdvertisingController : IClassFixture<AppFactory<Startup>>
     {
         private readonly AppFactory<Startup> _factory;
         private HttpClient _http;
 
-        public App_AdvertisingController(AppFactory<Startup> factory)
+        public AdvertisingController(AppFactory<Startup> factory)
         {
             _factory = factory;
             _http = _factory.CreateClient();
