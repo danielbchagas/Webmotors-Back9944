@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Webmotors.Back9944.App.Tests.Factories;
-using Webmotors.Back9944.Business.Models;
+using Webmotors.Back9944.Business.DTOs;
 using Xunit;
 
 namespace Webmotors.Back9944.App.Tests
@@ -12,16 +13,17 @@ namespace Webmotors.Back9944.App.Tests
     public class App_ServicesController : IClassFixture<AppFactory<Startup>>
     {
         private readonly AppFactory<Startup> _factory;
-        private HttpClient _http;
-
+        private readonly HttpClient _http;
+        
         public App_ServicesController(AppFactory<Startup> factory)
         {
             _factory = factory;
             _http = _factory.CreateClient();
+            _http.BaseAddress = new Uri("http://desafioonline.webmotors.com.br/api/OnlineChallenge/");
         }
 
         [Theory]
-        [InlineData("Services/makers")]
+        [InlineData("Make")]
         public async Task Get_EndpointReturnMakers(string url)
         {
             // Arrange
@@ -29,7 +31,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<MakerDto> result = JsonSerializer.Deserialize<IEnumerable<MakerDto>>(content, SerializeOptions());
+            IEnumerable<MakerDTO> result = JsonSerializer.Deserialize<IEnumerable<MakerDTO>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -37,9 +39,9 @@ namespace Webmotors.Back9944.App.Tests
         }
 
         [Theory]
-        [InlineData("Services/Models/1")]
-        [InlineData("Services/Models/2")]
-        [InlineData("Services/Models/3")]
+        [InlineData("Model?MakeID=1")]
+        [InlineData("Model?MakeID=2")]
+        [InlineData("Model?MakeID=3")]
         public async Task Get_EndpointReturnModels(string url)
         {
             // Arrange
@@ -47,7 +49,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<ModelDto> result = JsonSerializer.Deserialize<IEnumerable<ModelDto>>(content, SerializeOptions());
+            IEnumerable<ModelDTO> result = JsonSerializer.Deserialize<IEnumerable<ModelDTO>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
@@ -55,9 +57,9 @@ namespace Webmotors.Back9944.App.Tests
         }
 
         [Theory]
-        [InlineData("Services/Vehicles/1")]
-        [InlineData("Services/Vehicles/2")]
-        [InlineData("Services/Vehicles/3")]
+        [InlineData("Vehicles?Page=1")]
+        [InlineData("Vehicles?Page=2")]
+        [InlineData("Vehicles?Page=3")]
         public async Task Get_EndpointReturnVehicles(string url)
         {
             // Arrange
@@ -65,16 +67,16 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<VehicleDto> result = JsonSerializer.Deserialize<IEnumerable<VehicleDto>>(content, SerializeOptions());
+            IEnumerable<VehicleDTO> result = JsonSerializer.Deserialize<IEnumerable<VehicleDTO>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);
         }
 
         [Theory]
-        [InlineData("Services/Versions/1")]
-        [InlineData("Services/Versions/2")]
-        [InlineData("Services/Versions/3")]
+        [InlineData("Version?ModelID=1")]
+        [InlineData("Version?ModelID=2")]
+        [InlineData("Version?ModelID=3")]
         public async Task Get_EndpointReturnVersions(string url)
         {
             // Arrange
@@ -82,7 +84,7 @@ namespace Webmotors.Back9944.App.Tests
 
             // Act
             string content = await response.Content.ReadAsStringAsync();
-            IEnumerable<VersionDto> result = JsonSerializer.Deserialize<IEnumerable<VersionDto>>(content, SerializeOptions());
+            IEnumerable<VersionDTO> result = JsonSerializer.Deserialize<IEnumerable<VersionDTO>>(content, SerializeOptions());
 
             // Assert
             Assert.True(result.Count() > 0);

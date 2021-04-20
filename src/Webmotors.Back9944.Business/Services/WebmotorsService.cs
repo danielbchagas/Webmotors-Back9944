@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Webmotors.Back9944.Business.Configurations.Options;
+using Webmotors.Back9944.Business.DTOs;
 using Webmotors.Back9944.Business.Interfaces.Services;
-using Webmotors.Back9944.Business.Models;
+using Webmotors.Back9944.Business.Options;
 
 namespace Webmotors.Back9944.Business.Services
 {
@@ -23,32 +23,32 @@ namespace Webmotors.Back9944.Business.Services
             _http.BaseAddress = new Uri(_options.Base);
         }
 
-        public async Task<IEnumerable<MakerDto>> GetMakers()
+        public async Task<IEnumerable<MakerDTO>> GetMakers()
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Make);
 
-            return await Response<MakerDto>(response);
+            return await Response<MakerDTO>(response);
         }
 
-        public async Task<IEnumerable<ModelDto>> GetModels(int makerId)
+        public async Task<IEnumerable<ModelDTO>> GetModels(int makerId)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Model + makerId);
 
-            return await Response<ModelDto>(response);
+            return await Response<ModelDTO>(response);
         }
 
-        public async Task<IEnumerable<VehicleDto>> GetVehicles(int pageIndex)
+        public async Task<IEnumerable<VehicleDTO>> GetVehicles(int pageIndex)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Vehicle + pageIndex);
 
-            return await Response<VehicleDto>(response);
+            return await Response<VehicleDTO>(response);
         }
 
-        public async Task<IEnumerable<VersionDto>> GetVersions(int modelId)
+        public async Task<IEnumerable<VersionDTO>> GetVersions(int modelId)
         {
             HttpResponseMessage response = await _http.GetAsync(_options.Version + modelId);
 
-            return await Response<VersionDto>(response);
+            return await Response<VersionDTO>(response);
         }
 
         private JsonSerializerOptions SerializeOptions()

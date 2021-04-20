@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Webmotors.Back9944.Business.Models;
+using Webmotors.Back9944.Business.DTOs;
 
 namespace Webmotors.Back9944.Business.Interfaces.Services
 {
     public interface IWebmotorsService
     {
-        Task<IEnumerable<MakerDto>> GetMakers();
-        Task<IEnumerable<ModelDto>> GetModels(int makerId);
-        Task<IEnumerable<VersionDto>> GetVersions(int modelId);
-        Task<IEnumerable<VehicleDto>> GetVehicles(int pageIndex);
+        Task<IEnumerable<MakerDTO>> GetMakers();
+        Task<IEnumerable<ModelDTO>> GetModels(int makerId);
+        Task<IEnumerable<VersionDTO>> GetVersions(int modelId);
+        Task<IEnumerable<VehicleDTO>> GetVehicles(int pageIndex);
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Webmotors.Back9944.App.Configurations;
 using Webmotors.Back9944.App.Middlewares;
-using Webmotors.Back9944.Business.Configurations.Options;
+using Webmotors.Back9944.Business.Options;
 
 namespace Webmotors.Back9944.App
 {

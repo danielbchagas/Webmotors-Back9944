@@ -1,6 +1,6 @@
-namespace Webmotors.Back9944.Business.Models
+namespace Webmotors.Back9944.Business.DTOs
 {
-    public class VehicleDto
+    public class VehicleDTO
     {
         public int Id { get; set; }
         public string Make {get;set;}

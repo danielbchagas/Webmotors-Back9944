@@ -1,4 +1,4 @@
-﻿namespace Webmotors.Back9944.Business.Configurations.Options
+﻿namespace Webmotors.Back9944.Business.Options
 {
     public class WebServiceOptions
     {
