@@ -20,8 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{89BD1185-5
 		docs\Back9944.pdf = docs\Back9944.pdf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webmotors.Back9944.Domain.Tests", "Tests\Webmotors.Back9944.Domain.Tests\Webmotors.Back9944.Domain.Tests.csproj", "{57500901-BBD2-4AB6-88DA-279603BB994E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,10 +42,6 @@ Global
 		{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57500901-BBD2-4AB6-88DA-279603BB994E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57500901-BBD2-4AB6-88DA-279603BB994E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57500901-BBD2-4AB6-88DA-279603BB994E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57500901-BBD2-4AB6-88DA-279603BB994E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,7 +51,6 @@ Global
 		{00AF8095-117F-4FCB-A636-58DC21851A53} = {C55BE882-20B4-4695-AF49-7255FEEB18A0}
 		{E11682BD-10BF-4655-8515-FA73BC4049BA} = {C55BE882-20B4-4695-AF49-7255FEEB18A0}
 		{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B} = {96C29CDC-42D5-45D4-8D2F-99878F1E09AB}
-		{57500901-BBD2-4AB6-88DA-279603BB994E} = {96C29CDC-42D5-45D4-8D2F-99878F1E09AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00296391-598E-46D8-9093-2EB6DE7963FA}
