@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.Business
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{96C29CDC-42D5-45D4-8D2F-99878F1E09AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.App.Tests", "tests\Webmotors.Back9944.App.Tests\Webmotors.Back9944.App.Tests.csproj", "{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webmotors.Back9944.Tests", "tests\Webmotors.Back9944.Tests\Webmotors.Back9944.Tests.csproj", "{8D60416E-1475-4A62-A3FD-5E51DB7CBF3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C55BE882-20B4-4695-AF49-7255FEEB18A0}"
 EndProject
