@@ -16,14 +16,24 @@ namespace Webmotors.Back9944.App.Middlewares
             _logger = logger;
         }
 
-        public async Task InvokeAsync(HttpContext http)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
-                await _next(http);
+                await _next(context);
+            }
+            catch(ArgumentException e)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsJsonAsync(e.Message);
+                
+                _logger.LogError(e.Message);
             }
             catch (Exception e)
             {
+                context.Response.StatusCode = 500;
+                await context.Response.WriteAsJsonAsync(e.Message);
+                
                 _logger.LogError(e.Message);
             }
         }

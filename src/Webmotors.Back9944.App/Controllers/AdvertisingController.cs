@@ -1,12 +1,12 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webmotors.Back9944.App.ViewModels;
 using Webmotors.Back9944.Business.Interfaces.Services;
 using Webmotors.Back9944.Business.Models;
-using AutoMapper;
 
 namespace Webmotors.Back9944.App.Controllers
 {
@@ -25,98 +25,66 @@ namespace Webmotors.Back9944.App.Controllers
             _mapper = mapper;
         }
 
+        [ProducesResponseType(typeof(IEnumerable<Advertising>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         [Route("Get")]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                var result = await _service.Get();
+            var result = await _service.Get();
 
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return Problem(e.Message);
-            }
+            return Ok(result);
         }
 
+        [ProducesResponseType(typeof(Advertising), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         [Route("Get/{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            try
-            {
-                var result = await _service.Get(id);
+            var result = await _service.Get(id);
 
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return Problem(e.Message);
-            }
+            return Ok(result);
         }
 
+        [ProducesResponseType(typeof(Advertising), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         [Route("Create")]
         public async Task<IActionResult> Post(AdvertisingViewModel advertising)
         {
-            try
-            {
-                await _service.Create(await FromIdToName(advertising));
+            await _service.Create(await FromIdToName(advertising));
 
-                return Created(nameof(Get), advertising.Id);
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (Exception e)
-            {
-                return Problem(e.Message);
-            }
+            return Created(nameof(Get), advertising.Id);
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPut]
         [Route("Update")]
         public async Task<IActionResult> Put(AdvertisingViewModel advertising)
         {
-            try
-            {
-                await _service.Update(await FromIdToName(advertising));
+            await _service.Update(await FromIdToName(advertising));
 
-                return Ok();
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (Exception e)
-            {
-                return Problem(e.Message);
-            }
+            return Ok();
         }
 
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpDelete]
         [Route("Delete/{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var advertising = await _service.Get(id);
+            var advertising = await _service.Get(id);
 
-                await _service.Delete(advertising);
+            await _service.Delete(advertising);
 
-                return NoContent();
-            }
-            catch (ValidationException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (Exception e)
-            {
-                return Problem(e.Message);
-            }
+            return NoContent();
         }
 
         #region

@@ -55,7 +55,7 @@ namespace Webmotors.Back9944.App.Tests
         [Theory]
         [InlineData(-1)]
         [InlineData(-200)]
-        public async Task Delete_EndpointReturnInternalServerError(int id)
+        public async Task Delete_EndpointReturnBadRequest(int id)
         {
             // Arrange
 
@@ -63,13 +63,13 @@ namespace Webmotors.Back9944.App.Tests
             HttpResponseMessage response = await _http.DeleteAsync($"Advertising/Delete/{id}");
 
             // Assert
-            Assert.True((int)response.StatusCode == StatusCodes.Status500InternalServerError);
+            Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
         }
 
         [Theory]
         [InlineData(-1)]
         [InlineData(-200)]
-        public async Task Get_EndpointReturnInternalServerError(int id)
+        public async Task Get_EndpointReturnBadRequest(int id)
         {
             // Arrange
 
@@ -77,7 +77,7 @@ namespace Webmotors.Back9944.App.Tests
             HttpResponseMessage response = await _http.GetAsync($"Advertising/Get/{id}");
 
             // Assert
-            Assert.True((int)response.StatusCode == StatusCodes.Status500InternalServerError);
+            Assert.True((int)response.StatusCode == StatusCodes.Status400BadRequest);
         }
 
         private StringContent GetStringContent(Advertising advertising)
